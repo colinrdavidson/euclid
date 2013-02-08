@@ -1,0 +1,122 @@
+<!-- 
+State of the Union:
+-the files Point.js, Line.js, and Circle.js exist in the js folder
+-test.html supports Oxford commas
+-for now, objects placed at the beginning of the game shall be green, goals
+  shall be red, and intermediates shall be blue
+-test.html will steal from canvas.html until its superiority is recognized, then it
+  will erase any trace of the former canvas.html
+
+Next Steps:
+-build a basic UI to allow user to create lines, cirlces
+-automatically compute all intersections and create points for them whenever a
+new line or cirlce object is created
+-decide on a good data structure to allow the previous to be simple/efficient
+-->
+
+<html>
+  <head>
+    <script type="text/javascript" 
+            src="http://code.jquery.com/jquery-latest.js"> </script>
+
+    <script type="text/javascript"
+            src="js/Point.js"> </script>
+
+    <script type="text/javascript"
+            src="js/Line.js"> </script>
+
+    <script type="text/javascript"
+            src="js/Circle.js"> </script>
+
+    <style type="text/css">
+      #canvas{border:black 1px solid;}
+
+      #buttonDiv{
+        height:30px; 
+        width:400px; 
+        border:black 1px solid;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
+      }
+
+      #messageDiv{
+        height:30px; 
+        width:400px; 
+        border:black 1px solid;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
+      }
+
+    </style>
+
+    <script>
+
+      function init(){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var pointA=[];
+        var lineA=[];
+        var circleA=[];
+
+        $("#start").click(function() { [pointA, lineA, circleA] = clickStart(ctx, pointA, lineA, circleA); });
+        $("#line").click(function() { [pointA, lineA, circleA] = clickLine(ctx, pointA, lineA, circleA); });
+        $("#circle").click(function() { [pointA, lineA, circleA] = clickCircle(ctx, pointA, lineA, circleA); });
+      }
+
+      function clickStart(ctx, pointA, lineA, circleA){
+        pointA.push(new Point(ctx, 150,150));
+        pointA.push(new Point(ctx, 150,200));
+
+        for (var i=0; i<pointA.length; i++){
+          pointA[i].draw("#FF0000");
+        }
+
+        return [pointA, lineA, circleA];
+      }
+
+      function clickLine(ctx, pointA, lineA, circleA){
+        lineA.push(new Line(ctx, pointA[0], pointA[1]));
+
+        for (var i=0; i<lineA.length; i++){
+          lineA[i].draw("#0000FF");
+        }
+
+        return [pointA, lineA, circleA];
+      }
+
+      function clickCircle(ctx, pointA, lineA, circleA){
+        circleA.push(new Circle(ctx, pointA[1], pointA[0]));
+
+        for (var i=0; i<circleA.length; i++){
+          circleA[i].draw("#0000FF");
+        }
+
+        return [pointA, lineA, circleA];
+      }
+   </script>
+
+  </head>
+  <body onload="init();">
+    <!--make a few divs for canvas, buttons, messages-->
+    <div id="everythingDiv">
+
+      <div id="canvasDiv">
+        <canvas id="canvas" width="400" height="400"></canvas>
+      </div>
+      <br>
+      <div id="buttonDiv"> 
+        <button id="start"> Start </button>
+        <button id="line"> Line </button>
+        <button id="circle"> Circle </button>
+      </div>
+      <br>
+      <div id = "messageDiv">
+        This is where messages would go
+      </div>
+    </div>
+
+  </body>
+</html>
