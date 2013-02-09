@@ -58,11 +58,15 @@ new line or cirlce object is created
         var circleA=[];
 
         var mouseOverPoint = null; 
-        var currentPoint1 = new Point(ctx, 50, 50);
-        var currentPoint2 = new Point(ctx, 50, 100);
+        var currentPoint1 = null;
+        var currentPoint2 = null;
+        
+        //test points
+        var point1 = new Point(ctx, 50, 50);
+        var point2 = new Point(ctx, 50, 100);
         var point3 = new Point(ctx, 100, 100);
         
-        pointA.push(currentPoint1, currentPoint2, point3);
+        pointA.push(point1, point2, point3);
 
         $("#start").click(function() { clickStart(pointA); });
         $("#line").click(function() { clickLine(ctx, currentPoint1, currentPoint2, lineA); });
@@ -72,8 +76,10 @@ new line or cirlce object is created
 
         $("#canvas").mousedown(function(e) {
           if (mouseOverPoint){
-            [currentPoint1, currentPoint2] = clickCanvas(ctx, e, pointA, lineA,
-            circleA, mouseOverPoint, currentPoint1, currentPoint2);
+            var clickedPoints = clickCanvas(ctx, e, pointA, lineA, circleA,  mouseOverPoint, currentPoint1, currentPoint2);
+            currentPoint1 = clickedPoints[0];
+            currentPoint2 = clickedPoints[1];
+
           }
         });
       }
