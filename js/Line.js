@@ -1,16 +1,26 @@
 var Line = function (ctx, pt1, pt2){
   this.ctx = ctx;
   this.pt1 = pt1;
-  this.pt2 = pt2;}
+  this.pt2 = pt2;
+}
 
 Line.prototype.getCtx = function () {
-  return this.ctx }
+  return this.ctx 
+}
 
 Line.prototype.getPt1 = function () {
-  return this.pt1 }
+  return this.pt1 
+}
 
 Line.prototype.getPt2 = function () {
-  return this.pt2 }
+  return this.pt2 
+}
+
+Line.prototype.isSame = function (Ln) {
+  if (this.pt1.isSame(Ln.getPt1()) && this.pt2.isSame(Ln.getPt2())) return true;
+  else if (this.pt1.isSame(Ln.getPt2()) && this.pt2.isSame(Ln.getPt1())) return true;
+  else return false;
+}
 
 Line.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
