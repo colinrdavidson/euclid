@@ -65,11 +65,42 @@ new line or cirlce object is created
         $("#line").click(function() { [pointA, lineA, circleA] = clickLine(ctx, pointA, lineA, circleA); });
         $("#circle").click(function() { [pointA, lineA, circleA] = clickCircle(ctx, pointA, lineA, circleA); });
 
-        $("#canvas").mousemove(function(e) { 
-          mouseOverPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); 
-          if (mouseOverPoint != null) console.log("New Point:", mouseOverPoint.getX(), mouseOverPoint.getY());
-        });
- 
+        $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); });
+
+        $("#canvas").mousedown(function(e) {
+          [currentPoint1, currentPoint2] = clickCanvas(ctx, e, pointA, lineA,
+          circleA, mouseOverPoint, currentPoint1, currentPoint2);});
+      }
+
+      function clickCanvas (ctx, e, pointA, lineA, circleA, mouseOverPoint, pt1, pt2){
+        if (!pt2) {
+          console.log("First point added");
+          console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
+          return [null, mouseOverPoint];
+        }
+        else if (!pt1) {
+          if (pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
+          mouseOverPoint.getY()){
+            console.log("Trying to add same point, no changes");
+          }
+          else {
+            console.log("Second point added");
+            console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+            return[pt2, mouseOverPoint];
+          }
+        }
+        else if ( pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
+        mouseOverPoint.getY())
+        {
+          console.log("Trying to add same point, no changes");
+          return [pt1, pt2];
+        }
+        else{
+          console.log("Jimmy the points");
+          console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (",
+          mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+          return [pt2, mouseOverPoint];
+        }
       }
 
       //Fix how the currentPoint is updated so it remains current when you
