@@ -64,22 +64,22 @@ new line or cirlce object is created
         var lineA=[];
         var circleA=[];
 
-        var currentPoint = null;
+        var mouseOverPoint = null; 
         var previousPoint;
 
         $("#start").click(function() { [pointA, lineA, circleA] = clickStart(ctx, pointA, lineA, circleA); });
         $("#line").click(function() { [pointA, lineA, circleA] = clickLine(ctx, pointA, lineA, circleA); });
         $("#circle").click(function() { [pointA, lineA, circleA] = clickCircle(ctx, pointA, lineA, circleA); });
 
-        $("#canvas").mousemove(function(e) { currentPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); 
-          if (currentPoint != null) console.log("New Point:", currentPoint.getX(), currentPoint.getY());
+        $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); 
+          if (mouseOverPoint != null) console.log("New Point:", mouseOverPoint.getX(), mouseOverPoint.getY());
         });
       }
 
       //Fix how the currentPoint is updated so it remains current when you
       //mouse off of it
       function myMouseFtn (ctx, pointA, x, y){
-        var i = 0;;
+        var i = 0;
         while (i <= pointA.length - 1){
           var currPoint = pointA[i];
 
