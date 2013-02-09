@@ -4,14 +4,23 @@ var Point = function (ctx, x, y){
   this.y = y;
 }
 Point.prototype.getCtx = function () {
-  return this.ctx }
+  return this.ctx; 
+}
 
 Point.prototype.getX = function () {
-  return this.x }
+  return this.x; 
+}
 
 Point.prototype.getY = function () {
-  return this.y }
+  return this.y; 
+}
 
+Point.prototype.isSame = function(pt) {
+  if (this.ctx == pt.getCtx() && this.x == pt.getX() && this.y == pt.getY()) return true;
+  else return false; 
+}
+
+  
 Point.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
 
