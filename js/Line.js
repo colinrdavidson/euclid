@@ -15,6 +15,10 @@ Line.prototype.getPt2 = function () {
 Line.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
 
+  if (!colour){
+    colour = "#000000";
+  }
+
   //local vars
   var ctx = this.getCtx();
   var pt1X = this.getPt1().getX();

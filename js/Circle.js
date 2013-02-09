@@ -18,6 +18,9 @@ Circle.prototype.getLoc = function () {
 
 Circle.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
+  if (!colour){
+    colour = "#000000";
+  }
   
   //local vars
   var ctx = this.getCtx();

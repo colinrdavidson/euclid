@@ -24,6 +24,10 @@ Point.prototype.isSame = function(pt) {
 Point.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
 
+  if (!colour){
+    colour = "#000000";
+  }
+
   //local vars
   var ctx = this.getCtx();
   var x = this.getX();
