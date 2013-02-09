@@ -68,20 +68,24 @@ new line or cirlce object is created
         $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); });
 
         $("#canvas").mousedown(function(e) {
-          [currentPoint1, currentPoint2] = clickCanvas(ctx, e, pointA, lineA,
-          circleA, mouseOverPoint, currentPoint1, currentPoint2);});
+          if (mouseOverPoint){
+            [currentPoint1, currentPoint2] = clickCanvas(ctx, e, pointA, lineA,
+            circleA, mouseOverPoint, currentPoint1, currentPoint2);
+          }
+        });
       }
 
       function clickCanvas (ctx, e, pointA, lineA, circleA, mouseOverPoint, pt1, pt2){
         if (!pt2) {
           console.log("First point added");
           console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
-          return [null, mouseOverPoint];
+          return [pt1, mouseOverPoint];
         }
         else if (!pt1) {
           if (pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
           mouseOverPoint.getY()){
             console.log("Trying to add same point, no changes");
+            return [pt1, pt2];
           }
           else {
             console.log("Second point added");
