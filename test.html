@@ -58,12 +58,15 @@ new line or cirlce object is created
         var circleA=[];
 
         var mouseOverPoint = null; 
-        var currentPoint1 = null;
-        var currentPoint2 = null;
+        var currentPoint1 = new Point(ctx, 50, 50);
+        var currentPoint2 = new Point(ctx, 50, 100);
+        var point3 = new Point(ctx, 100, 100);
+        
+        pointA.push(currentPoint1, currentPoint2, point3);
 
-        $("#start").click(function() { [pointA, lineA, circleA] = clickStart(ctx, pointA, lineA, circleA); });
-        $("#line").click(function() { [pointA, lineA, circleA] = clickLine(ctx, pointA, lineA, circleA); });
-        $("#circle").click(function() { [pointA, lineA, circleA] = clickCircle(ctx, pointA, lineA, circleA); });
+        $("#start").click(function() { clickStart(pointA); });
+        $("#line").click(function() { clickLine(ctx, currentPoint1, currentPoint2, lineA); });
+        $("#circle").click(function() { clickCircle(ctx, currentPoint1, currentPoint2, circleA); });
 
         $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointA, e.pageX - offsetLeft, e.pageY - offsetTop); });
 
@@ -127,35 +130,58 @@ new line or cirlce object is created
         return Math.sqrt(Math.pow(pt1X - pt2X, 2) + Math.pow(pt1Y - pt2Y, 2));
       }
 
-      function clickStart(ctx, pointA, lineA, circleA){
-        pointA.push(new Point(ctx, 150,150));
-        pointA.push(new Point(ctx, 150,200));
-
-        for (var i=0; i<pointA.length; i++){
-          pointA[i].draw("#FF0000");
+      function clickStart(pointA){
+        for(var i = 0; i < pointA.length; i++){
+          pointA[i].draw();
         }
+      } 
 
-        return [pointA, lineA, circleA];
+      function clickLine(ctx, currentPoint1, currentPoint2, lineA){
+        if (currentPoint1 && currentPoint2)
+        {
+          var line = new Line(ctx, currentPoint1, currentPoint2);
+
+          var contains = false;
+
+          for (var i = 0; i < lineA.length; i++){
+            if (lineA[i].getCtx() == line.getCtx() &&
+              lineA[i].getX() == line.getX() && 
+              lineA[i].getY() == line.getY()){
+                contains = true;
+                break;
+            }
+          }
+          
+          if (!contains){
+            lineA.push(line);
+          }
+
+          line.draw();
+        }
       }
 
-      function clickLine(ctx, pointA, lineA, circleA){
-        lineA.push(new Line(ctx, pointA[0], pointA[1]));
+      function clickCircle(ctx, currentPoint1, currentPoint2, circleA){
+        if (currentPoint1 && currentPoint2)
+        {
+          var circle = new Circle(ctx, currentPoint1, currentPoint2);
 
-        for (var i=0; i<lineA.length; i++){
-          lineA[i].draw("#0000FF");
+          var contains = false;
+
+          for (var i = 0; i < circleA.length; i++){
+            if (circleA[i].getCtx() == circle.getCtx() &&
+              circleA[i].getX() == circle.getX() && 
+              circleA[i].getY() == circle.getY()){
+                contains = true;
+                break;
+            }
+          }
+          
+          if (!contains){
+            circleA.push(circle);
+          }
+
+          circle.draw();
         }
-
-        return [pointA, lineA, circleA];
-      }
-
-      function clickCircle(ctx, pointA, lineA, circleA){
-        circleA.push(new Circle(ctx, pointA[1], pointA[0]));
-
-        for (var i=0; i<circleA.length; i++){
-          circleA[i].draw("#0000FF");
-        }
-
-        return [pointA, lineA, circleA];
       }
    </script>
 
