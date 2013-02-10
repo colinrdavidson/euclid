@@ -150,9 +150,7 @@ new line or cirlce object is created
           var contains = false;
 
           for (var i = 0; i < lineA.length; i++){
-            if (lineA[i].getCtx() == line.getCtx() &&
-              lineA[i].getX() == line.getX() && 
-              lineA[i].getY() == line.getY()){
+             if (line.isSame(lineA[i])){
                 contains = true;
                 break;
             }
