@@ -22,7 +22,36 @@ new line or cirlce object is created
     <script type="text/javascript"  src="js/Circle.js"> </script>
 
     <style type="text/css">
-      #canvas{border:black 1px solid; position:relative}
+      #canvasDiv{
+        width:400; 
+        height:400;
+      }
+
+      #initial{
+        z-index:1;
+        position:absolute;
+        border:black 1px solid; 
+      }
+        
+      #drawn{
+        z-index:2;
+        position:absolute;
+      }
+
+      #current{
+        z-index:3;
+        position:absolute;
+      }
+
+      #highlighted{
+        z-index:4;
+        position:absolute;
+      }
+
+      #user{
+        z-index:5;
+        position:absolute;
+      }
 
       #buttonDiv{
         height:30px; 
@@ -47,11 +76,25 @@ new line or cirlce object is created
     <script>
 
       function init(){
-        var canvas = $("#canvas")[0];
-        var ctx = canvas.getContext("2d");
+        var canvasInitial = $("#initial")[0];
+        var ctxInitial = canvasInitial.getContext("2d");
 
-        var offsetTop = canvas.offsetTop;
-        var offsetLeft = canvas.offsetLeft;
+        var canvasDrawn = $("#drawn")[0];
+        var ctxDrawn = canvasDrawn.getContext("2d");
+
+        var canvasCurrent = $("#current")[0];
+        var ctxCurrent = canvasCurrent.getContext("2d");
+
+        var canvasHighlighted = $("#highlighted")[0];
+        var ctxHighlighted = canvasHighlighted.getContext("2d");
+
+        var canvasUser = $("#user")[0];
+        var ctxUser = canvasUser.getContext("2d");
+
+        //All mouse events occur on user layer as it is on top
+
+        var offsetTop = canvasInitial.offsetTop;
+        var offsetLeft = canvasInitial.offsetLeft;
 
         var pointArray = [];
         var lineArray = [];
@@ -64,22 +107,23 @@ new line or cirlce object is created
         var currentPoint2 = null;
         
         //test points
-        var point1 = new Point(ctx, 200, 200);
-        var point2 = new Point(ctx, 200, 100);
-        var point3 = new Point(ctx, 100, 150);
-        var point4 = new Point(ctx, 300, 150);
+        var point1 = new Point(ctxInitial, 50, 50);
+        var point2 = new Point(ctxDrawn, 50, 100);
+        var point3 = new Point(ctxCurrent, 50, 150);
+        var point4 = new Point(ctxHighlighted, 50, 200);
+        var point5 = new Point(ctxUser, 50, 250);
         
-        pointArray.push(point1, point2, point3, point4);
+        pointArray.push(point1, point2, point3, point4, point5);
 
-        $("#start").click(function() { clickStart(pointArray); });
-        $("#line").click(function() { clickLine(ctx, currentPoint1, currentPoint2, lineArray); });
-        $("#circle").click(function() { clickCircle(ctx, currentPoint1, currentPoint2, circleArray); });
+        $("#startButton").click(function() { console.log("clicked start"); clickStart(pointArray); });
+        $("#lineButton").click(function() { console.log("clicked line"); clickLine(ctxUser, currentPoint1, currentPoint2, lineArray); });
+        $("#circleButton").click(function() { console.log("clicked circle"); clickCircle(ctxUser, currentPoint1, currentPoint2, circleArray); });
 
-        $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
+        $("#user").mousemove(function(e) { mouseOverPoint = myMouseFtn(pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
 
-        $("#canvas").mousedown(function(e) {
+        $("#user").mousedown(function(e) {
           if (mouseOverPoint){
-            var clickedPoints = clickCanvas(ctx, e, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
+            var clickedPoints = clickCanvas(ctxUser, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
             currentPoint1 = clickedPoints[0];
             currentPoint2 = clickedPoints[1];
 
@@ -87,15 +131,14 @@ new line or cirlce object is created
         });
       }
 
-      function clickCanvas (ctx, e, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
+      function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
           console.log("First point added");
           console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
           return [pt1, mouseOverPoint];
         }
         else if (!pt1) {
-          if (pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
-          mouseOverPoint.getY()){
+          if (pt2.isSame(mouseOverPoint)){
             console.log("Trying to add same point, no changes");
             return [pt1, pt2];
           }
@@ -105,8 +148,7 @@ new line or cirlce object is created
             return[pt2, mouseOverPoint];
           }
         }
-        else if ( pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
-        mouseOverPoint.getY())
+        else if (pt2.isSame(mouseOverPoint))
         {
           console.log("Trying to add same point, no changes");
           return [pt1, pt2];
@@ -121,7 +163,7 @@ new line or cirlce object is created
 
       //Fix how the currentPoint is updated so it remains current when you
       //mouse off of it
-      function myMouseFtn (ctx, pointArray, x, y){
+      function myMouseFtn (pointArray, x, y){
         var i = 0;
         while (i <= pointArray.length - 1){
           var currPoint = pointArray[i];
@@ -204,14 +246,18 @@ new line or cirlce object is created
     <!--make a few divs for canvas, buttons, messages-->
     <div id="everythingDiv">
 
-      <div id="canvasDiv">
-        <canvas id="canvas" width="400" height="400"></canvas>
+      <div id="canvasDiv" >
+        <canvas id="initial" width="400" height="400"></canvas>
+        <canvas id="drawn" width="400" height="400"></canvas>
+        <canvas id="current" width="400" height="400"></canvas>
+        <canvas id="highlighted" width="400" height="400"></canvas>
+        <canvas id="user" width="400" height="400"></canvas>
       </div>
       <br>
       <div id="buttonDiv"> 
-        <button id="start"> Start </button>
-        <button id="line"> Line </button>
-        <button id="circle"> Circle </button>
+        <button id="startButton"> Start </button>
+        <button id="lineButton"> Line </button>
+        <button id="circleButton"> Circle </button>
       </div>
       <br>
       <div id = "messageDiv">
