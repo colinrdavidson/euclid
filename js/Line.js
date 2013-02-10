@@ -94,3 +94,7 @@ Line.prototype.intersectsWith = function(shape){
 
 }
 
+Line.prototype.toString = function(){
+  return "Line: " + this.getPt1().toString() + ", " + this.getPt2().toString(); 
+}
+

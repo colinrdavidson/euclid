@@ -41,3 +41,6 @@ Point.prototype.draw = function (colour) {
   ctx.fill();
 }
 
+Point.prototype.toString = function(){
+  return "Point: " + this.getX() + "," + this.getY();
+}

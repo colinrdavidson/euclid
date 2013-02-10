@@ -52,3 +52,6 @@ Circle.prototype.draw = function (colour) {
   ctx.stroke();
 }
 
+Circle.prototype.toString = function(){
+  return "Circle: " + this.getFoc().toString() + ", " + this.getLoc().toString();
+}
