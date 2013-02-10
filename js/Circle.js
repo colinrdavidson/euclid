@@ -5,16 +5,27 @@ var Circle = function (ctx, foc, loc){
 
   this.ctx = ctx;
   this.foc = foc;
-  this.loc = loc;}
+  this.loc = loc;
+}
 
 Circle.prototype.getCtx = function () {
-  return this.ctx }
+  return this.ctx 
+}
 
 Circle.prototype.getFoc = function () {
-  return this.foc }
+  return this.foc 
+}
 
 Circle.prototype.getLoc = function () {
-  return this.loc }
+  return this.loc 
+}
+
+Circle.prototype.isSame = function (Cir) {
+  if (this.foc.isSame(Cir.getFoc()) && this.loc.isSame(Cir.getLoc())) return true;
+  else return false;
+}
+
+
 
 Circle.prototype.draw = function (colour) {
   //colour is string "#RRGGBB"
