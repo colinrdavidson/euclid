@@ -1,0 +1,211 @@
+<!-- 
+State of the Union:
+-the files Point.js, Line.js, and Circle.js exist in the js folder
+-test.html supports Oxford commas
+-for now, objects placed at the beginning of the game shall be green, goals
+  shall be red, and intermediates shall be blue
+-test.html will steal from canvas.html until its superiority is recognized, then it
+  will erase any trace of the former canvas.html
+
+Next Steps:
+-build a basic UI to allow user to create lines, cirlces
+-automatically compute all intersections and create points for them whenever a
+new line or cirlce object is created
+-decide on a good data structure to allow the previous to be simple/efficient
+-->
+
+<html>
+  <head>
+    <script type="text/javascript"  src="http://code.jquery.com/jquery-latest.js"> </script>
+    <script type="text/javascript"  src="js/Point.js"> </script>
+    <script type="text/javascript"  src="js/Line.js"> </script>
+    <script type="text/javascript"  src="js/Circle.js"> </script>
+
+    <style type="text/css">
+      #canvas{border:black 1px solid; position:relative}
+
+      #buttonDiv{
+        height:30px; 
+        width:400px; 
+        border:black 1px solid;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
+      }
+
+      #messageDiv{
+        height:30px; 
+        width:400px; 
+        border:black 1px solid;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
+      }
+
+    </style>
+
+    <script>
+
+      function init(){
+        var canvas = $("#canvas")[0];
+        var ctx = canvas.getContext("2d");
+
+        var offsetTop = canvas.offsetTop;
+        var offsetLeft = canvas.offsetLeft;
+
+        var pointArray=[];
+        var lineArray=[];
+        var circleArray=[];
+
+        var mouseOverPoint = null; 
+        var currentPoint1 = null;
+        var currentPoint2 = null;
+        
+        //test points
+        var point1 = new Point(ctx, 50, 50);
+        var point2 = new Point(ctx, 50, 100);
+        var point3 = new Point(ctx, 100, 100);
+        
+        pointArray.push(point1, point2, point3);
+
+        $("#start").click(function() { clickStart(pointArray); });
+        $("#line").click(function() { clickLine(ctx, currentPoint1, currentPoint2, lineArray); });
+        $("#circle").click(function() { clickCircle(ctx, currentPoint1, currentPoint2, circleArray); });
+
+        $("#canvas").mousemove(function(e) { mouseOverPoint = myMouseFtn(ctx, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
+
+        $("#canvas").mousedown(function(e) {
+          if (mouseOverPoint){
+            var clickedPoints = clickCanvas(ctx, e, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
+            currentPoint1 = clickedPoints[0];
+            currentPoint2 = clickedPoints[1];
+
+          }
+        });
+      }
+
+      function clickCanvas (ctx, e, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
+        if (!pt2) {
+          console.log("First point added");
+          console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
+          return [pt1, mouseOverPoint];
+        }
+        else if (!pt1) {
+          if (pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
+          mouseOverPoint.getY()){
+            console.log("Trying to add same point, no changes");
+            return [pt1, pt2];
+          }
+          else {
+            console.log("Second point added");
+            console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+            return[pt2, mouseOverPoint];
+          }
+        }
+        else if ( pt2.getX() == mouseOverPoint.getX() && pt2.getY() ==
+        mouseOverPoint.getY())
+        {
+          console.log("Trying to add same point, no changes");
+          return [pt1, pt2];
+        }
+        else{
+          console.log("Jimmy the points");
+          console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (",
+          mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+          return [pt2, mouseOverPoint];
+        }
+      }
+
+      //Fix how the currentPoint is updated so it remains current when you
+      //mouse off of it
+      function myMouseFtn (ctx, pointArray, x, y){
+        var i = 0;
+        while (i <= pointArray.length - 1){
+          var currPoint = pointArray[i];
+
+          if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
+            return currPoint;
+          }
+          i++;
+        }
+        return null;
+      }
+
+      function pointPointDistance (pt1X, pt1Y, pt2X, pt2Y)
+      {
+        return Math.sqrt(Math.pow(pt1X - pt2X, 2) + Math.pow(pt1Y - pt2Y, 2));
+      }
+
+      function clickStart(pointArray){
+        for(var i = 0; i < pointArray.length; i++){
+          pointArray[i].draw();
+        }
+      } 
+
+      function clickLine(ctx, currentPoint1, currentPoint2, lineArray){
+        if (currentPoint1 && currentPoint2)
+        {
+          var line = new Line(ctx, currentPoint1, currentPoint2);
+
+          var contains = false;
+
+          for (var i = 0; i < lineArray.length; i++){
+             if (line.isSame(lineArray[i])){
+                contains = true;
+                break;
+            }
+          }
+          
+          if (!contains){
+            lineArray.push(line);
+          }
+
+          line.draw();
+        }
+      }
+
+      function clickCircle(ctx, currentPoint1, currentPoint2, circleArray){
+        if (currentPoint1 && currentPoint2)
+        {
+          var circle = new Circle(ctx, currentPoint1, currentPoint2);
+
+          var contains = false;
+
+          for (var i = 0; i < circleArray.length; i++){
+            if (circle.isSame(circleArray[i])){
+                contains = true;
+                break;
+            }
+          }
+          
+          if (!contains){
+            circleArray.push(circle);
+          }
+
+          circle.draw();
+        }
+      }
+   </script>
+
+  </head>
+  <body onload="init();">
+    <!--make a few divs for canvas, buttons, messages-->
+    <div id="everythingDiv">
+
+      <div id="canvasDiv">
+        <canvas id="canvas" width="400" height="400"></canvas>
+      </div>
+      <br>
+      <div id="buttonDiv"> 
+        <button id="start"> Start </button>
+        <button id="line"> Line </button>
+        <button id="circle"> Circle </button>
+      </div>
+      <br>
+      <div id = "messageDiv">
+        This is where messages would go
+      </div>
+    </div>
+
+  </body>
+</html>
