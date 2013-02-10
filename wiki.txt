@@ -1,0 +1,32 @@
+Euclid Wiki
+
+  Level
+    Goal (intersections)
+    Starting shapes (would be nice to have a specific layer for this but
+     not necessary)
+  Drawer
+    Handles layer management and drawing
+
+  Cool things to do:
+    Intersections
+    Layer
+
+
+ Intersections
+
+  Array storing all known intersections, which are just points as
+  opposed tofinding them everytime they click the screen.
+
+  When a shape is drawn, do you just iterate through all of our shapes
+  and check for intersection points, and then add them to the points.
+
+
+
+  Issues:
+    Math
+      Point overlapping is weird, because we click on a 5px raidus, so
+      we can click on more than 1 point at once... at the moment, the
+      first in the point array will register as clicked
+
+      There could also be some potential round errors to deal with.
+
