@@ -53,20 +53,23 @@ new line or cirlce object is created
         var offsetTop = canvas.offsetTop;
         var offsetLeft = canvas.offsetLeft;
 
-        var pointArray=[];
-        var lineArray=[];
-        var circleArray=[];
+        var pointArray = [];
+        var lineArray = [];
+        var circleArray = [];
+
+        var intersectionPoints = [];
 
         var mouseOverPoint = null; 
         var currentPoint1 = null;
         var currentPoint2 = null;
         
         //test points
-        var point1 = new Point(ctx, 50, 50);
-        var point2 = new Point(ctx, 50, 100);
-        var point3 = new Point(ctx, 100, 100);
+        var point1 = new Point(ctx, 200, 200);
+        var point2 = new Point(ctx, 200, 100);
+        var point3 = new Point(ctx, 100, 150);
+        var point4 = new Point(ctx, 300, 150);
         
-        pointArray.push(point1, point2, point3);
+        pointArray.push(point1, point2, point3, point4);
 
         $("#start").click(function() { clickStart(pointArray); });
         $("#line").click(function() { clickLine(ctx, currentPoint1, currentPoint2, lineArray); });
@@ -142,7 +145,7 @@ new line or cirlce object is created
         }
       } 
 
-      function clickLine(ctx, currentPoint1, currentPoint2, lineArray){
+      function clickLine(ctx, currentPoint1, currentPoint2, lineArray, intersectionPoints){
         if (currentPoint1 && currentPoint2)
         {
           var line = new Line(ctx, currentPoint1, currentPoint2);
@@ -157,7 +160,16 @@ new line or cirlce object is created
           }
           
           if (!contains){
+
+            for(var i = 0; i < lineArray.length; i++){
+              var intersections = line.intersectsWith(lineArray[i]);
+
+              intersections[0] && intersections[0].draw();
+            }
+
             lineArray.push(line);
+            
+            
           }
 
           line.draw();
