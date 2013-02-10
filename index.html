@@ -123,7 +123,7 @@ new line or cirlce object is created
 
         $("#user").mousedown(function(e) {
           if (mouseOverPoint){
-            var clickedPoints = clickCanvas(ctxUser, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
+            var clickedPoints = clickCanvas(pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
             currentPoint1 = clickedPoints[0];
             currentPoint2 = clickedPoints[1];
 
@@ -131,7 +131,7 @@ new line or cirlce object is created
         });
       }
 
-      function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
+      function clickCanvas (pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
           console.log("First point added");
           console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
@@ -161,8 +161,6 @@ new line or cirlce object is created
         }
       }
 
-      //Fix how the currentPoint is updated so it remains current when you
-      //mouse off of it
       function myMouseFtn (pointArray, x, y){
         var i = 0;
         while (i <= pointArray.length - 1){
