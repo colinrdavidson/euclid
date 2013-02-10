@@ -172,9 +172,7 @@ new line or cirlce object is created
           var contains = false;
 
           for (var i = 0; i < circleA.length; i++){
-            if (circleA[i].getCtx() == circle.getCtx() &&
-              circleA[i].getX() == circle.getX() && 
-              circleA[i].getY() == circle.getY()){
+            if (circle.isSame(circleA[i])){
                 contains = true;
                 break;
             }
