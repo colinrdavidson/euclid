@@ -67,11 +67,11 @@ Line.prototype.intersectsWith = function(shape){
       
 
    if (m1 != m2){
-    if (m1 == Infinity){
+    if (m1 == Infinity || m1 == -Infinity){
       x = this.getPt1().getX();
       y = m2 * x + b2;
     }
-    else if (m2 == Infinity){
+    else if (m2 == Infinity || m1 == -Infinity){
       x = shape.getPt1().getX();
       y = m1 * x + b1;
     }
