@@ -19,6 +19,14 @@ Point.prototype.getY = function() {
   return this.y; 
 }
 
+Point.prototype.copy = function(ctx) {
+  if (!ctx){
+    return new Point(this.ctx, this.x, this.y);
+  }
+  else
+    return new Point(ctx, this.x, this.y);
+}
+
 Point.prototype.isSame = function(pt) {
   if (this.ctx == pt.getCtx() && this.x == pt.getX() && this.y == pt.getY()) return true;
   else return false; 
