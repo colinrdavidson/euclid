@@ -119,7 +119,7 @@ new line or cirlce object is created
         $("#lineButton").click(function() { console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2, lineArray); });
         $("#circleButton").click(function() { console.log("clicked circle"); clickCircle(ctxDrawn, currentPoint1, currentPoint2, circleArray); });
 
-        $("#user").mousemove(function(e) { mouseOverPoint = myMouseFtn(pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
+        $("#user").mousemove(function(e) { mouseOverPoint = mouseMove(pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
 
         $("#user").mousedown(function(e) {
           if (mouseOverPoint){
@@ -161,7 +161,7 @@ new line or cirlce object is created
         }
       }
 
-      function myMouseFtn (pointArray, x, y){
+      function mouseMove (pointArray, x, y){
         var i = 0;
         while (i <= pointArray.length - 1){
           var currPoint = pointArray[i];
