@@ -167,7 +167,7 @@ new line or cirlce object is created
           var currPoint = pointArray[i];
 
           if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
-            return currPoint;
+            return new Point (canvasHighlighted, currPoint.getX(), currPoint.getY());
           }
           i++;
         }
