@@ -151,7 +151,7 @@ new line or cirlce object is created
       function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
           console.log("First point added:", mouseOverPoint.toString());
-          return [pt1, new Point(ctx, mouseOverPoint.getX(), mouseOverPoint.getY())];
+          return [pt1, mouseOverPoint.copy(ctx)];
         }
         else if (!pt1) {
           if (pt2.isSame(mouseOverPoint)){
@@ -160,7 +160,7 @@ new line or cirlce object is created
           }
           else {
             console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-            return[pt2, new Point(ctx, mouseOverPoint.getX(), mouseOverPoint.getY())];
+            return[pt2, mouseOverPoint.copy(ctx)];
           }
         }
         else if (pt2.isSame(mouseOverPoint))
@@ -170,7 +170,7 @@ new line or cirlce object is created
         }
         else{
           console.log("Jimmy the points: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-          return [pt2, new Point(ctx, mouseOverPoint.getX(), mouseOverPoint.getY())];
+          return [pt2, mouseOverPoint.copy(ctx)];
         }
       }
 
@@ -180,8 +180,7 @@ new line or cirlce object is created
           var currPoint = pointArray[i];
 
           if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
-            myPoint = new Point(ctx, currPoint.getX(), currPoint.getY());
-            return myPoint;
+            return currPoint.copy(ctx);
           }
           i++;
         }
