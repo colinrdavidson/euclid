@@ -112,14 +112,14 @@ new line or cirlce object is created
         var point3 = new Point(ctxCurrent, 50, 150);
         var point4 = new Point(ctxHighlighted, 50, 200);
         var point5 = new Point(ctxUser, 50, 250);
-        
+
         pointArray.push(point1, point2, point3, point4, point5);
 
         $("#startButton").click(function() { console.log("clicked start"); clickStart(pointArray); });
         $("#lineButton").click(function() { console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2, lineArray); });
         $("#circleButton").click(function() { console.log("clicked circle"); clickCircle(ctxDrawn, currentPoint1, currentPoint2, circleArray); });
 
-        $("#user").mousemove(function(e) { mouseOverPoint = mouseMove(pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
+        $("#user").mousemove(function(e) { mouseOverPoint = mouseMove(canvasHighlighted, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop); });
 
         $("#user").mousedown(function(e) {
           if (mouseOverPoint){
@@ -133,8 +133,7 @@ new line or cirlce object is created
 
       function clickCanvas (pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
-          console.log("First point added");
-          console.log("pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ") and no pt1");
+          console.log("First point added:", mouseOverPoint.toString());
           return [pt1, mouseOverPoint];
         }
         else if (!pt1) {
@@ -143,8 +142,7 @@ new line or cirlce object is created
             return [pt1, pt2];
           }
           else {
-            console.log("Second point added");
-            console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (", mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+            console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
             return[pt2, mouseOverPoint];
           }
         }
@@ -154,20 +152,18 @@ new line or cirlce object is created
           return [pt1, pt2];
         }
         else{
-          console.log("Jimmy the points");
-          console.log("pt1: (", pt2.getX(), pt2.getY(), "), pt2: (",
-          mouseOverPoint.getX(), mouseOverPoint.getY(), ")");
+          console.log("Jimmy the points: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
           return [pt2, mouseOverPoint];
         }
       }
 
-      function mouseMove (pointArray, x, y){
+      function mouseMove (ctx, pointArray, x, y){
         var i = 0;
         while (i <= pointArray.length - 1){
           var currPoint = pointArray[i];
 
           if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
-            return new Point (canvasHighlighted, currPoint.getX(), currPoint.getY());
+            return new Point (ctx, currPoint.getX(), currPoint.getY());
           }
           i++;
         }
@@ -208,10 +204,9 @@ new line or cirlce object is created
             }
 
             lineArray.push(line);
-            
-            
           }
 
+          console.log(line.toString());
           line.draw();
         }
       }
@@ -234,6 +229,7 @@ new line or cirlce object is created
             circleArray.push(circle);
           }
 
+          console.log(circle.toString());
           circle.draw();
         }
       }
