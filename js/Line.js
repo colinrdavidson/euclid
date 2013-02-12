@@ -4,15 +4,19 @@ var Line = function (ctx, pt1, pt2){
   this.pt2 = pt2;
 }
 
-Line.prototype.getCtx = function () {
+Line.prototype.getCtx = function() {
   return this.ctx 
 }
 
-Line.prototype.getPt1 = function () {
+Line.prototype.scetCtx = function(newCtx) {
+  this.ctx = newCtx;
+}
+
+Line.prototype.getPt1 = function() {
   return this.pt1 
 }
 
-Line.prototype.getPt2 = function () {
+Line.prototype.getPt2 = function() {
   return this.pt2 
 }
 
@@ -20,13 +24,13 @@ Line.prototype.slope = function() {
   return (this.getPt1().getY() - this.getPt2().getY()) / (this.getPt1().getX() - this.getPt2().getX());
 }
 
-Line.prototype.isSame = function (Ln) {
+Line.prototype.isSame = function(Ln) {
   if (this.pt1.isSame(Ln.getPt1()) && this.pt2.isSame(Ln.getPt2())) return true;
   else if (this.pt1.isSame(Ln.getPt2()) && this.pt2.isSame(Ln.getPt1())) return true;
   else return false;
 }
 
-Line.prototype.draw = function (colour) {
+Line.prototype.draw = function(colour) {
   //colour is string "#RRGGBB"
 
   if (!colour){
@@ -95,6 +99,6 @@ Line.prototype.intersectsWith = function(shape){
 }
 
 Line.prototype.toString = function(){
-  return "Line: " + this.getPt1().toString() + ", " + this.getPt2().toString(); 
+  return "Line: (" + this.getPt1().toString() + ", " + this.getPt2().toString() + ")"; 
 }
 

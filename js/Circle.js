@@ -8,26 +8,30 @@ var Circle = function (ctx, foc, loc){
   this.loc = loc;
 }
 
-Circle.prototype.getCtx = function () {
+Circle.prototype.getCtx = function() {
   return this.ctx 
 }
 
-Circle.prototype.getFoc = function () {
+Circle.prototype.setCtx = function(newCtx) {
+  this.ctx = newCtx;
+}
+
+Circle.prototype.getFoc = function() {
   return this.foc 
 }
 
-Circle.prototype.getLoc = function () {
+Circle.prototype.getLoc = function() {
   return this.loc 
 }
 
-Circle.prototype.isSame = function (Cir) {
+Circle.prototype.isSame = function(Cir) {
   if (this.foc.isSame(Cir.getFoc()) && this.loc.isSame(Cir.getLoc())) return true;
   else return false;
 }
 
 
 
-Circle.prototype.draw = function (colour) {
+Circle.prototype.draw = function(colour) {
   //colour is string "#RRGGBB"
   if (!colour){
     colour = "#000000";
@@ -52,6 +56,6 @@ Circle.prototype.draw = function (colour) {
   ctx.stroke();
 }
 
-Circle.prototype.toString = function(){
-  return "Circle: " + this.getFoc().toString() + ", " + this.getLoc().toString();
+Circle.prototype.toString = function() {
+  return "Circle: (" + this.getFoc().toString() + ", " + this.getLoc().toString() + ")";
 }

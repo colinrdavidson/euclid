@@ -46,5 +46,5 @@ Point.prototype.draw = function(colour) {
 }
 
 Point.prototype.toString = function(){
-  return "Point: ( " + this.getX() + ", " + this.getY() + ")";
+  return "Point: (" + this.getX() + ", " + this.getY() + ")";
 }
