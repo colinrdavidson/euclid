@@ -1,17 +1,21 @@
-var Point = function (ctx, x, y){
+var Point = function(ctx, x, y){
   this.ctx = ctx;
   this.x = x;
   this.y = y;
 }
-Point.prototype.getCtx = function () {
+Point.prototype.getCtx = function() {
   return this.ctx; 
 }
 
-Point.prototype.getX = function () {
+Point.prototype.setCtx = function(newCtx) {
+  this.ctx = newCtx;
+}
+
+Point.prototype.getX = function() {
   return this.x; 
 }
 
-Point.prototype.getY = function () {
+Point.prototype.getY = function() {
   return this.y; 
 }
 
@@ -21,7 +25,7 @@ Point.prototype.isSame = function(pt) {
 }
 
   
-Point.prototype.draw = function (colour) {
+Point.prototype.draw = function(colour) {
   //colour is string "#RRGGBB"
 
   if (!colour){
@@ -42,5 +46,5 @@ Point.prototype.draw = function (colour) {
 }
 
 Point.prototype.toString = function(){
-  return "Point: " + this.getX() + "," + this.getY();
+  return "Point: ( " + this.getX() + ", " + this.getY() + ")";
 }
