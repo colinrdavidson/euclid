@@ -20,6 +20,7 @@ new line or cirlce object is created
     <script type="text/javascript"  src="js/Point.js"> </script>
     <script type="text/javascript"  src="js/Line.js"> </script>
     <script type="text/javascript"  src="js/Circle.js"> </script>
+    <script type="text/javascript"  src="js/drawHighlighted.js"> </script>
 
     <style type="text/css">
       #canvasDiv{
@@ -109,12 +110,9 @@ new line or cirlce object is created
         var currentPoint2 = null;
         
         //test points
-        var point1 = new Point(ctxInitial, 50, 50);
-        var point2 = new Point(ctxInitial, 50, 100);
-        var point3 = new Point(ctxInitial, 50, 150);
-        var point4 = new Point(ctxInitial, 50, 200);
-        var point5 = new Point(ctxInitial, 50, 250);
-        pointArray.push(point1, point2, point3, point4, point5);
+        var point1 = new Point(ctxInitial, 100, 200);
+        var point2 = new Point(ctxInitial, 300, 200);
+        pointArray.push(point1, point2);
 
         //Button Events
         $("#startButton").click(function() { 
@@ -132,6 +130,7 @@ new line or cirlce object is created
         //Mouse Events
         $("#user").mousemove(function(e) { 
           mouseOverPoint = mouseMove(ctxHighlighted, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop);
+          drawHighlighted(ctxHighlighted, mouseOverPoint);
         });
 
         $("#user").mousedown(function(e) {
@@ -139,8 +138,6 @@ new line or cirlce object is created
             var clickedPoints = clickCanvas(ctxCurrent, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
             currentPoint1 = clickedPoints[0];
             currentPoint2 = clickedPoints[1];
-
-
             
             ctxCurrent.clearRect(0,0,400,400);
             if (currentPoint1) currentPoint1.draw("#00FF00");
@@ -148,6 +145,7 @@ new line or cirlce object is created
           }
         });
       }
+
 
       function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
