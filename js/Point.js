@@ -28,7 +28,7 @@ Point.prototype.copy = function(ctx) {
 }
 
 Point.prototype.isSame = function(pt) {
-  if (this.ctx == pt.getCtx() && this.x == pt.getX() && this.y == pt.getY()) return true;
+  if (this.x == pt.getX() && this.y == pt.getY()) return true;
   else return false; 
 }
 
