@@ -150,12 +150,12 @@ new line or cirlce object is created
       function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
         if (!pt2) {
           console.log("First point added:", mouseOverPoint.toString());
-          return [pt1, mouseOverPoint.copy(ctx)];
+          return [null, mouseOverPoint.copy(ctx)];
         }
         else if (!pt1) {
           if (pt2.isSame(mouseOverPoint)){
             console.log("Trying to add same point, no changes");
-            return [pt1, pt2];
+            return [null, pt2];
           }
           else {
             console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
