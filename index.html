@@ -21,6 +21,9 @@ new line or cirlce object is created
     <script type="text/javascript"  src="js/Line.js"> </script>
     <script type="text/javascript"  src="js/Circle.js"> </script>
     <script type="text/javascript"  src="js/drawHighlighted.js"> </script>
+    <script type="text/javascript"  src="js/buttonFunctions.js"> </script>
+    <script type="text/javascript"  src="js/mouseFunctions.js"> </script>
+    <script type="text/javascript"  src="js/helperFunctions.js"> </script>
 
     <style type="text/css">
       #canvasDiv{
@@ -28,27 +31,27 @@ new line or cirlce object is created
         height:400;
         border:black 1px solid;
       }
-
+      
       #initial{
         z-index:1;
         position:absolute;
       }
-        
+      
       #drawn{
         z-index:2;
         position:absolute;
       }
-
+      
       #current{
         z-index:3;
         position:absolute;
       }
-
+      
       #highlighted{
         z-index:4;
         position:absolute;
       }
-
+      
       #user{
         z-index:5;
         position:absolute;
@@ -62,7 +65,7 @@ new line or cirlce object is created
         vertical-align:middle;
         text-align:center;
       }
-
+      
       #messageDiv{
         height:30px; 
         width:400px; 
@@ -71,7 +74,6 @@ new line or cirlce object is created
         vertical-align:middle;
         text-align:center;
       }
-
     </style>
 
     <script>
@@ -145,111 +147,7 @@ new line or cirlce object is created
           }
         });
       }
-
-
-      function clickCanvas (ctx, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
-        if (!pt2) {
-          console.log("First point added:", mouseOverPoint.toString());
-          return [null, mouseOverPoint.copy(ctx)];
-        }
-        else if (!pt1) {
-          if (pt2.isSame(mouseOverPoint)){
-            console.log("Trying to add same point, no changes");
-            return [null, pt2];
-          }
-          else {
-            console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-            return[pt2, mouseOverPoint.copy(ctx)];
-          }
-        }
-        else if (pt2.isSame(mouseOverPoint))
-        {
-          console.log("Trying to add same point, no changes");
-          return [pt1, pt2];
-        }
-        else{
-          console.log("Jimmy the points: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-          return [pt2, mouseOverPoint.copy(ctx)];
-        }
-      }
-
-      function mouseMove (ctx, pointArray, x, y){
-        var i = 0;
-        while (i <= pointArray.length - 1){
-          var currPoint = pointArray[i];
-
-          if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
-            return currPoint.copy(ctx);
-          }
-          i++;
-        }
-        return null;
-      }
-
-      function pointPointDistance (pt1X, pt1Y, pt2X, pt2Y)
-      {
-        return Math.sqrt(Math.pow(pt1X - pt2X, 2) + Math.pow(pt1Y - pt2Y, 2));
-      }
-
-      function clickStart(pointArray){
-        for(var i = 0; i < pointArray.length; i++){
-          pointArray[i].draw();
-        }
-      } 
-
-      function clickLine(ctx, currentPoint1, currentPoint2, lineArray, intersectionPoints){
-        if (currentPoint1 && currentPoint2)
-        {
-          var line = new Line(ctx, currentPoint1, currentPoint2);
-
-          var contains = false;
-
-          for (var i = 0; i < lineArray.length; i++){
-             if (line.isSame(lineArray[i])){
-                contains = true;
-                break;
-            }
-          }
-          
-          if (!contains){
-
-            for(var i = 0; i < lineArray.length; i++){
-              var intersections = line.intersectsWith(lineArray[i]);
-
-              intersections[0] && intersections[0].draw();
-            }
-
-            lineArray.push(line);
-          }
-
-          console.log(line.toString());
-          line.draw();
-        }
-      }
-
-      function clickCircle(ctx, currentPoint1, currentPoint2, circleArray){
-        if (currentPoint1 && currentPoint2)
-        {
-          var circle = new Circle(ctx, currentPoint1, currentPoint2);
-
-          var contains = false;
-
-          for (var i = 0; i < circleArray.length; i++){
-            if (circle.isSame(circleArray[i])){
-                contains = true;
-                break;
-            }
-          }
-          
-          if (!contains){
-            circleArray.push(circle);
-          }
-
-          console.log(circle.toString());
-          circle.draw();
-        }
-      }
-   </script>
+    </script>
 
   </head>
   <body onload="init();">
