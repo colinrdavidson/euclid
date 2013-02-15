@@ -28,8 +28,10 @@ Point.prototype.copy = function(ctx) {
 }
 
 Point.prototype.isSame = function(pt) {
-  if (this.x == pt.getX() && this.y == pt.getY()) return true;
-  else return false; 
+  if ((pt instanceof Point) && (this.x == pt.getX() && this.y == pt.getY()))
+    return true;
+  else
+    return false; 
 }
 
   
@@ -55,4 +57,14 @@ Point.prototype.draw = function(colour) {
 
 Point.prototype.toString = function(){
   return "Point: (" + this.getX() + ", " + this.getY() + ")";
+}
+
+Point.prototype.isInArray = function(array){
+  //assume this array is full of points
+  for(var i = 0; i < array.length; i++){
+    if (this.isSame(array[i]))
+      return true;
+  }
+
+  return false;
 }
