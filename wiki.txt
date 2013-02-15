@@ -1,4 +1,7 @@
 Euclid Wiki
+  IMMEDIATE BUG
+    Some lines don't intersect with some lines.
+      -likely a rounding error, need to decide on an accuracy
 
   Level
     Goal (intersections)
