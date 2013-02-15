@@ -114,15 +114,7 @@ new line or cirlce object is created
         //test points
         var point1 = new Point(ctxInitial, 100, 200);
         var point2 = new Point(ctxInitial, 300, 200);
-        var point3 = new Point(ctxInitial, 200, 100);
-        var point4 = new Point(ctxInitial, 200, 300);
-        pointArray.push(point1, point2, point3, point4);
-
-        var testPoint = new Point(ctxInitial, 100, 200);
-        var testPoint1 = new Point(ctxInitial, 300, 100);
-
-        console.log(testPoint.isInArray(pointArray));
-        console.log(testPoint1.isInArray(pointArray));
+        pointArray.push(point1, point2);
 
         //Button Events
         $("#startButton").click(function() { 
@@ -130,11 +122,11 @@ new line or cirlce object is created
         });
 
         $("#lineButton").click(function() { 
-          console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2,pointArray, lineArray, circleArray, intersectionPoints); 
+          console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints); 
         });
         
         $("#circleButton").click(function() { 
-          console.log("clicked circle"); clickCircle(ctxDrawn, currentPoint1, currentPoint2, circleArray); 
+          console.log("clicked circle"); clickCircle(ctxDrawn, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints); 
         });
 
         //Mouse Events
