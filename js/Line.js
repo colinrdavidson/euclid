@@ -54,48 +54,112 @@ Line.prototype.draw = function(colour) {
 }
 
 
+
+//Line.prototype.intersectsWith = function(shape){
+//  var pointsOfIntersection = [];
+//
+//  if (shape instanceof Circle){
+//    console.log("Not doin' circles yet!");
+//  }
+//  else if (shape instanceof Line){
+//   var m1 = this.slope();
+//   var m2 = shape.slope();
+//   var x;
+//   var y;
+//
+//   var b1 = this.getPt1().getY() - this.getPt1().getX()*m1;
+//   var b2 = shape.getPt1().getY() - this.getPt1().getX()*m2;
+//      
+//
+//   if (m1 != m2){
+//    if (m1 == Infinity || m1 == -Infinity){
+//      x = this.getPt1().getX();
+//      y = m2 * x + b2;
+//    }
+//    else if (m2 == Infinity || m1 == -Infinity){
+//      x = shape.getPt1().getX();
+//      y = m1 * x + b1;
+//    }
+//    else{
+//      x = (b2 - b1) / (m1 - m2);
+//      y = m1 * x + b1;
+//    }
+//
+//    if ((this.getPt1().getX() <= x && x <= this.getPt2().getX()) ||
+//         this.getPt2().getX() <= x && x <= this.getPt1().getX()){
+//           pointsOfIntersection.push(new Point(this.getCtx(), x, y));
+//    }
+//   }
+//  }
+//  else{
+//    console.log("Not a shape!");
+//  }
+//  
+//  return pointsOfIntersection;
+//
+//}
+
 Line.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
 
   if (shape instanceof Circle){
-    console.log("Not doin' circles yet!");
+    console.log("Not tonight biys");
   }
   else if (shape instanceof Line){
-   var m1 = this.slope();
-   var m2 = shape.slope();
-   var x;
-   var y;
+    var x1 = shape.getPt1().getX();
+    var y1 = shape.getPt1().getY();
+    var x2 = shape.getPt2().getX();
+    var y2 = shape.getPt2().getY();
 
-   var b1 = this.getPt1().getY() - this.getPt1().getX()*m1;
-   var b2 = shape.getPt1().getY() - this.getPt1().getX()*m2;
+    var x3 = this.getPt1().getX();
+    var y3 = this.getPt1().getY();
+    var x4 = this.getPt2().getX();
+    var y4 = this.getPt2().getY();
+
+    //check parrallel
+    var denominator = (x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4);
+
+    if (denominator != 0){
+     var newX = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4)) / denominator; 
+     var newY = ((x1*y2 - y1*x2)*(y3-y4) - (y1-y2)*(x3*y4 - y3*x4)) / denominator; 
+
+     var point = new Point(this.ctx, newX, newY);
+
+     //points in segment
+     if (!this.containsPoint(point)){
+      pointsOfIntersection.push(point);
+     }
       
-
-   if (m1 != m2){
-    if (m1 == Infinity || m1 == -Infinity){
-      x = this.getPt1().getX();
-      y = m2 * x + b2;
-    }
-    else if (m2 == Infinity || m1 == -Infinity){
-      x = shape.getPt1().getX();
-      y = m1 * x + b1;
     }
     else{
-      x = (b2 - b1) / (m1 - m2);
-      y = m1 * x + b1;
+      console.log("parallel");
     }
-
-    if ((this.getPt1().getX() <= x && x <= this.getPt2().getX()) ||
-         this.getPt2().getX() <= x && x <= this.getPt1().getX()){
-           pointsOfIntersection.push(new Point(this.getCtx(), x, y));
-    }
-   }
   }
   else{
-    console.log("Not a shape!");
+    console.log("Not a shape.");
+  }
+
+  return pointsOfIntersection;
+}
+
+
+Line.prototype.containsPoint = function(point){
+  //check if its even on the line
+  var changeX = this.getPt2().getX() - this.getPt1().getX();
+  var changeY = this.getPt2().getY() - this.getPt1().getY();
+
+  var hX = (point.getX() - this.getPt1().getX()) / changeX;
+  var hY = (point.getY() - this.getPt1().getY()) / changeY;
+  
+  if (hX == hY){
+    if ((this.getPt1().getX() <= point.getX() && point.getX() <= this.getPt2().getX()) ||
+        (this.getPt2().getX() <= point.getX() && point.getX() <= this.getPt1().getX())){
+      return true;
+    }
+
   }
   
-  return pointsOfIntersection;
-
+  return false;
 }
 
 Line.prototype.toString = function(){

@@ -4,7 +4,7 @@ function clickStart(pointArray){
   }
 } 
 
-function clickLine(ctx, currentPoint1, currentPoint2, lineArray, intersectionPoints){
+function clickLine(ctx, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
   if (currentPoint1 && currentPoint2)
   {
     var line = new Line(ctx, currentPoint1, currentPoint2);
@@ -19,11 +19,19 @@ function clickLine(ctx, currentPoint1, currentPoint2, lineArray, intersectionPoi
     }
 
     if (!contains){
-
       for(var i = 0; i < lineArray.length; i++){
         var intersections = line.intersectsWith(lineArray[i]);
 
-        intersections[0] && intersections[0].draw();
+        if (intersections[0]){
+          if (!intersections[0].isInArray(intersectionPoints)){
+            intersectionPoints.push(intersections[0]);
+          }
+
+          if (!intersections[0].isInArray(pointArray)){
+            pointArray.push(intersections[0]);
+          }
+          intersections[0].draw();
+        }
       }
 
       lineArray.push(line);

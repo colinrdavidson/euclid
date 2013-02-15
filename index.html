@@ -114,7 +114,15 @@ new line or cirlce object is created
         //test points
         var point1 = new Point(ctxInitial, 100, 200);
         var point2 = new Point(ctxInitial, 300, 200);
-        pointArray.push(point1, point2);
+        var point3 = new Point(ctxInitial, 200, 100);
+        var point4 = new Point(ctxInitial, 200, 300);
+        pointArray.push(point1, point2, point3, point4);
+
+        var testPoint = new Point(ctxInitial, 100, 200);
+        var testPoint1 = new Point(ctxInitial, 300, 100);
+
+        console.log(testPoint.isInArray(pointArray));
+        console.log(testPoint1.isInArray(pointArray));
 
         //Button Events
         $("#startButton").click(function() { 
@@ -122,7 +130,7 @@ new line or cirlce object is created
         });
 
         $("#lineButton").click(function() { 
-          console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2, lineArray); 
+          console.log("clicked line"); clickLine(ctxDrawn, currentPoint1, currentPoint2,pointArray, lineArray, circleArray, intersectionPoints); 
         });
         
         $("#circleButton").click(function() { 
@@ -174,4 +182,4 @@ new line or cirlce object is created
     </div>
 
   </body>
-</html>
+</htmlrequesting tickets for 4170799 426{>
