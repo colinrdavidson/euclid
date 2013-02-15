@@ -29,20 +29,20 @@ function clickLine(ctx, currentPoint1, currentPoint2, pointArray, lineArray, cir
 
           if (!intersections[0].isInArray(pointArray)){
             pointArray.push(intersections[0]);
+            console.log(intersections[0].toString());
+            intersections[0].draw();
           }
-          intersections[0].draw();
         }
       }
 
       lineArray.push(line);
+      console.log(line.toString());
+      line.draw();
     }
-
-    console.log(line.toString());
-    line.draw();
   }
 }
 
-function clickCircle(ctx, currentPoint1, currentPoint2, circleArray){
+function clickCircle(ctx, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
   if (currentPoint1 && currentPoint2)
   {
     var circle = new Circle(ctx, currentPoint1, currentPoint2);
@@ -57,10 +57,24 @@ function clickCircle(ctx, currentPoint1, currentPoint2, circleArray){
     }
 
     if (!contains){
-      circleArray.push(circle);
-    }
+      for(var i = 0; i < circleArray.length; i++){
+        var intersections = circle.intersectsWith(circleArray[i]);
 
-    console.log(circle.toString());
-    circle.draw();
+        for (var j = 0; j < intersections.length; j++){
+          if (!intersections[j].isInArray(intersectionPoints)){
+            intersectionPoints.push(intersections[j]);
+          }
+
+          if (!intersections[j].isInArray(pointArray)){
+            pointArray.push(intersections[j]);
+            console.log(intersections[j].toString());
+            intersections[j].draw();
+          }
+        }
+      }
+      circleArray.push(circle);
+      console.log(circle.toString());
+      circle.draw();
+    }
   }
 }
