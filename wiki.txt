@@ -1,5 +1,7 @@
 Euclid Wiki
-  IMMEDIATE BUG
+  IMMEDIATE BUGS
+    Circle isSame function borked. 
+      -need to check focus and rad, not focus and locus.
     Some lines don't intersect with some lines.
       -likely a rounding error, need to decide on an accuracy
 
