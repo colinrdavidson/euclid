@@ -19,18 +19,21 @@ function clickLine(ctx, currentPoint1, currentPoint2, pointArray, lineArray, cir
     }
 
     if (!contains){
-      for(var i = 0; i < lineArray.length; i++){
-        var intersections = line.intersectsWith(lineArray[i]);
+      shapesArray = lineArray.concat(circleArray);
+      for(var i = 0; i < shapesArray.length; i++){
+        var intersections = line.intersectsWith(shapesArray[i]);
 
-        if (intersections[0]){
-          if (!intersections[0].isInArray(intersectionPoints)){
-            intersectionPoints.push(intersections[0]);
-          }
+        for (var j = 0; j < intersections.length; j++){
+          if (intersections[j]){
+            if (!intersections[j].isInArray(intersectionPoints)){
+              intersectionPoints.push(intersections[j]);
+            }
 
-          if (!intersections[0].isInArray(pointArray)){
-            pointArray.push(intersections[0]);
-            console.log(intersections[0].toString());
-            intersections[0].draw();
+            if (!intersections[j].isInArray(pointArray)){
+              pointArray.push(intersections[j]);
+              console.log(intersections[j].toString());
+              intersections[j].draw();
+            }
           }
         }
       }
@@ -57,8 +60,9 @@ function clickCircle(ctx, currentPoint1, currentPoint2, pointArray, lineArray, c
     }
 
     if (!contains){
-      for(var i = 0; i < circleArray.length; i++){
-        var intersections = circle.intersectsWith(circleArray[i]);
+      shapesArray = lineArray.concat(circleArray);
+      for(var i = 0; i < shapesArray.length; i++){
+        var intersections = circle.intersectsWith(shapesArray[i]);
 
         for (var j = 0; j < intersections.length; j++){
           if (!intersections[j].isInArray(intersectionPoints)){
