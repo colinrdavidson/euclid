@@ -55,20 +55,90 @@ Line.prototype.draw = function(colour) {
 
 Line.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
+  var x1 = this.getPt1().getX();
+  var y1 = this.getPt1().getY();
+  var x2 = this.getPt2().getX();
+  var y2 = this.getPt2().getY();
 
   if (shape instanceof Circle){
-    console.log("Not tonight biys");
-  }
-  else if (shape instanceof Line){
-    var x1 = shape.getPt1().getX();
-    var y1 = shape.getPt1().getY();
-    var x2 = shape.getPt2().getX();
-    var y2 = shape.getPt2().getY();
+    //P1 is the first line point
+    //P2 is the second line point
+    //C is the centre of the circle
+    var focX = shape.getFoc().getX();
+    var focY = shape.getFoc().getY();
+    var locX = shape.getLoc().getX();
+    var locY = shape.getLoc().getY();
 
-    var x3 = this.getPt1().getX();
-    var y3 = this.getPt1().getY();
-    var x4 = this.getPt2().getX();
-    var y4 = this.getPt2().getY();
+    var r = pointPointDistance(focX, focY, locX, locY);
+
+    //(dP2x, dP2y) is vector from P1 to P2
+    var dP2x = x2 - x1;
+    var dP2y = y2 - y1;
+
+    //(dCx, dCy) is vector from P1 to C 
+    var dCx = focX - x1;
+    var dCy = focY - y1;
+
+    //a is the distance from point 1 to C
+    var a = pointPointDistance(x1, y1, focX, locX);
+
+    //P3 is C projected onto the line
+    //projScale is the scalar for the projection
+    var projScale = (dCx*dP2x + dCy*dP2y)/(dP2x*dP2x + dP2y*dP2y);
+
+    //(dP3x, dP3y) is the vector from P1 to P3
+    var dP3x = projScale*dP2x;
+    var dP3y = projScale*dP2y;
+
+    x3 = x1 + dP3x;
+    y3 = y1 + dP3y;
+
+    //b is the distance from C to P3
+    var b = pointPointDistance(focX, focY, x3, y3);
+
+    //d is the dsiatnce from P1 to P3
+    var d = pointPointDistance(x1, y1, x3, y3);
+
+    if (b == r){ //intersect at 1 point
+      var point = new Point(this.ctx, x3, y3); //projection is the only intersection
+      
+      //point in segment
+      if (this.containsPoint(point)){
+        pointsOfIntersection.push(point);
+      }
+    }
+    else if (b < r){
+      //offset is the distance from P3 to the intersection
+      var offset = Math.sqrt(r*r - b*b);
+      var newX1 = x3 - dP3x*(offset/d);
+      var newY1 = y3 - dP3y*(offset/d);
+      var newX2 = x3 + dP3x*(offset/d);
+      var newY2 = y3 + dP3y*(offset/d);
+
+      var point1 = new Point(this.ctx, newX1, newY1);
+      var point2 = new Point(this.ctx, newX2, newY2);
+
+      //point1 in segment
+      if (this.containsPoint(point1)){
+        pointsOfIntersection.push(point1);
+      }
+
+      //point2 in segment
+      if (this.containsPoint(point2)){
+        pointsOfIntersection.push(point2);
+      }
+    }
+  }
+    
+  else if (shape instanceof Line){
+    var x1 = this.getPt1().getX();
+    var y1 = this.getPt1().getY();
+    var x2 = this.getPt2().getX();
+    var y2 = this.getPt2().getY();
+    var x3 = shape.getPt1().getX();
+    var y3 = shape.getPt1().getY();
+    var x4 = shape.getPt2().getX();
+    var y4 = shape.getPt2().getY();
 
     //check parrallel
     var denominator = (x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4);
@@ -125,7 +195,7 @@ Line.prototype.containsPoint = function(point){
     hX = (point.getX() - this.getPt1().getX()) / changeX;
     hY = (point.getY() - this.getPt1().getY()) / changeY;
 
-    if (hX == hY && hX > 0 && hX < 1){
+    if (hX > 0 && hX < 1){
       return true;
     }
   }
