@@ -1,7 +1,7 @@
 var Point = function(ctx, x, y){
   this.ctx = ctx;
-  this.x = x;
-  this.y = y;
+  this.x = Math.round(x*10000000)/10000000;
+  this.y = Math.round(y*10000000)/10000000;
 }
 Point.prototype.getCtx = function() {
   return this.ctx; 
