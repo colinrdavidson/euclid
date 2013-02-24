@@ -132,7 +132,7 @@ Circle.prototype.intersectsWith = function(shape){
   }
 
   else if (shape instanceof Line){
-    console.log("Not tongiht byes");
+    return shape.intersectsWith(this);
   }
   else{
     console.log("Not a shape");
