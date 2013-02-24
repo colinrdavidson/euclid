@@ -1,34 +1,22 @@
 Euclid Wiki
-  IMMEDIATE BUGS
-    Circle isSame function borked. 
-      -need to check focus and rad, not focus and locus.
-    Some lines don't intersect with some lines.
-      -likely a rounding error, need to decide on an accuracy
-
   Level
-    Goal (intersections)
+    Level loader
+    Goal 
     Starting shapes (would be nice to have a specific layer for this but
      not necessary)
+
   Drawer
     Handles layer management and drawing
 
-  Cool things to do:
-    Intersections
-    Layer
+  Intersections
+    Don't draw until chosen
 
 
- Intersections
+  Issues
+    Layers
+      Look into how intersections get context
 
-  Array storing all known intersections, which are just points as
-  opposed tofinding them everytime they click the screen.
-
-  When a shape is drawn, do you just iterate through all of our shapes
-  and check for intersection points, and then add them to the points.
-
-
-
-  Issues:
-    Math
+    Math Issues
       Point overlapping is weird, because we click on a 5px raidus, so
       we can click on more than 1 point at once... at the moment, the
       first in the point array will register as clicked
