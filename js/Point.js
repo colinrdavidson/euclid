@@ -3,7 +3,7 @@ var Point = function(ctx, x, y){
   this.x = Math.round(x*10000000)/10000000;
   this.y = Math.round(y*10000000)/10000000;
 }
-Point.prototype.getCtx = function() {
+Point.prototype.Ctx = function() {
   return this.ctx; 
 }
 
@@ -11,11 +11,11 @@ Point.prototype.setCtx = function(newCtx) {
   this.ctx = newCtx;
 }
 
-Point.prototype.getX = function() {
+Point.prototype.X = function() {
   return this.x; 
 }
 
-Point.prototype.getY = function() {
+Point.prototype.Y = function() {
   return this.y; 
 }
 
@@ -28,7 +28,7 @@ Point.prototype.copy = function(ctx) {
 }
 
 Point.prototype.isSame = function(pt) {
-  if ((pt instanceof Point) && (this.x == pt.getX() && this.y == pt.getY()))
+  if ((pt instanceof Point) && (this.x == pt.X() && this.y == pt.Y()))
     return true;
   else
     return false; 
@@ -43,9 +43,9 @@ Point.prototype.draw = function(colour) {
   }
 
   //local vars
-  var ctx = this.getCtx();
-  var x = this.getX();
-  var y = this.getY();
+  var ctx = this.Ctx();
+  var x = this.X();
+  var y = this.Y();
 
   //draw the point
   ctx.fillStyle = colour;
@@ -56,7 +56,7 @@ Point.prototype.draw = function(colour) {
 }
 
 Point.prototype.toString = function(){
-  return "Point: (" + this.getX() + ", " + this.getY() + ")";
+  return "Point: (" + this.X() + ", " + this.Y() + ")";
 }
 
 Point.prototype.isInArray = function(array){

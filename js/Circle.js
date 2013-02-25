@@ -8,7 +8,7 @@ var Circle = function (ctx, foc, loc){
   this.loc = loc;
 }
 
-Circle.prototype.getCtx = function() {
+Circle.prototype.Ctx = function() {
   return this.ctx 
 }
 
@@ -16,16 +16,16 @@ Circle.prototype.setCtx = function(newCtx) {
   this.ctx = newCtx;
 }
 
-Circle.prototype.getFoc = function() {
+Circle.prototype.Foc = function() {
   return this.foc 
 }
 
-Circle.prototype.getLoc = function() {
+Circle.prototype.Loc = function() {
   return this.loc 
 }
 
 Circle.prototype.isSame = function(Cir) {
-  if (this.foc.isSame(Cir.getFoc()) && this.loc.isSame(Cir.getLoc())) return true;
+  if (this.foc.isSame(Cir.Foc()) && this.loc.isSame(Cir.Loc())) return true;
   else return false;
 }
 
@@ -38,11 +38,11 @@ Circle.prototype.draw = function(colour) {
   }
   
   //local vars
-  var ctx = this.getCtx();
-  var focX = this.getFoc().getX();
-  var focY = this.getFoc().getY();
-  var locX = this.getLoc().getX();
-  var locY = this.getLoc().getY();
+  var ctx = this.Ctx();
+  var focX = this.Foc().X();
+  var focY = this.Foc().Y();
+  var locX = this.Loc().X();
+  var locY = this.Loc().Y();
   
 
   //compute radius
@@ -60,12 +60,12 @@ Circle.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
 
   if (shape instanceof Circle){
-    var x0 = this.getFoc().getX();
-    var y0 = this.getFoc().getY();
-    var r0 = pointPointDistance(this.getFoc().getX(), this.getFoc().getY(), this.getLoc().getX(), this.getLoc().getY());
-    var x1 = shape.getFoc().getX(); 
-    var y1 = shape.getFoc().getY();
-    var r1 = pointPointDistance(shape.getFoc().getX(), shape.getFoc().getY(), shape.getLoc().getX(), shape.getLoc().getY());
+    var x0 = this.Foc().X();
+    var y0 = this.Foc().Y();
+    var r0 = pointPointDistance(this.Foc().X(), this.Foc().Y(), this.Loc().X(), this.Loc().Y());
+    var x1 = shape.Foc().X(); 
+    var y1 = shape.Foc().Y();
+    var r1 = pointPointDistance(shape.Foc().X(), shape.Foc().Y(), shape.Loc().X(), shape.Loc().Y());
     var a, dx, dy, d, h, rx, ry;
     var x2, y2;
 
@@ -142,5 +142,5 @@ Circle.prototype.intersectsWith = function(shape){
 }
 
 Circle.prototype.toString = function() {
-  return "Circle: (" + this.getFoc().toString() + ", " + this.getLoc().toString() + ")";
+  return "Circle: (" + this.Foc().toString() + ", " + this.Loc().toString() + ")";
 }

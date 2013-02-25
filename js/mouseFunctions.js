@@ -29,7 +29,7 @@ function mouseMove (ctx, pointArray, x, y){
   while (i <= pointArray.length - 1){
     var currPoint = pointArray[i];
 
-    if (pointPointDistance(x, y, currPoint.getX(), currPoint.getY()) <= 5){
+    if (pointPointDistance(x, y, currPoint.X(), currPoint.Y()) <= 5){
       return currPoint.copy(ctx);
     }
     i++;

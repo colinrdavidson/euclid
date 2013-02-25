@@ -4,7 +4,7 @@ var Line = function (ctx, pt1, pt2){
   this.pt2 = pt2;
 }
 
-Line.prototype.getCtx = function() {
+Line.prototype.Ctx = function() {
   return this.ctx 
 }
 
@@ -12,21 +12,21 @@ Line.prototype.scetCtx = function(newCtx) {
   this.ctx = newCtx;
 }
 
-Line.prototype.getPt1 = function() {
+Line.prototype.Pt1 = function() {
   return this.pt1 
 }
 
-Line.prototype.getPt2 = function() {
+Line.prototype.Pt2 = function() {
   return this.pt2 
 }
 
 Line.prototype.slope = function() {
-  return (this.getPt1().getY() - this.getPt2().getY()) / (this.getPt1().getX() - this.getPt2().getX());
+  return (this.Pt1().Y() - this.Pt2().Y()) / (this.Pt1().X() - this.Pt2().X());
 }
 
 Line.prototype.isSame = function(Ln) {
-  if (this.pt1.isSame(Ln.getPt1()) && this.pt2.isSame(Ln.getPt2())) return true;
-  else if (this.pt1.isSame(Ln.getPt2()) && this.pt2.isSame(Ln.getPt1())) return true;
+  if (this.pt1.isSame(Ln.Pt1()) && this.pt2.isSame(Ln.Pt2())) return true;
+  else if (this.pt1.isSame(Ln.Pt2()) && this.pt2.isSame(Ln.Pt1())) return true;
   else return false;
 }
 
@@ -38,11 +38,11 @@ Line.prototype.draw = function(colour) {
   }
 
   //local vars
-  var ctx = this.getCtx();
-  var pt1X = this.getPt1().getX();
-  var pt1Y = this.getPt1().getY();
-  var pt2X = this.getPt2().getX();
-  var pt2Y = this.getPt2().getY();
+  var ctx = this.Ctx();
+  var pt1X = this.Pt1().X();
+  var pt1Y = this.Pt1().Y();
+  var pt2X = this.Pt2().X();
+  var pt2Y = this.Pt2().Y();
 
   //draw the line
   ctx.fillstyle = colour;
@@ -55,19 +55,19 @@ Line.prototype.draw = function(colour) {
 
 Line.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
-  var x1 = this.getPt1().getX();
-  var y1 = this.getPt1().getY();
-  var x2 = this.getPt2().getX();
-  var y2 = this.getPt2().getY();
+  var x1 = this.Pt1().X();
+  var y1 = this.Pt1().Y();
+  var x2 = this.Pt2().X();
+  var y2 = this.Pt2().Y();
 
   if (shape instanceof Circle){
     //P1 is the first line point
     //P2 is the second line point
     //C is the centre of the circle
-    var focX = shape.getFoc().getX();
-    var focY = shape.getFoc().getY();
-    var locX = shape.getLoc().getX();
-    var locY = shape.getLoc().getY();
+    var focX = shape.Foc().X();
+    var focY = shape.Foc().Y();
+    var locX = shape.Loc().X();
+    var locY = shape.Loc().Y();
 
     var r = pointPointDistance(focX, focY, locX, locY);
 
@@ -131,14 +131,14 @@ Line.prototype.intersectsWith = function(shape){
   }
     
   else if (shape instanceof Line){
-    var x1 = this.getPt1().getX();
-    var y1 = this.getPt1().getY();
-    var x2 = this.getPt2().getX();
-    var y2 = this.getPt2().getY();
-    var x3 = shape.getPt1().getX();
-    var y3 = shape.getPt1().getY();
-    var x4 = shape.getPt2().getX();
-    var y4 = shape.getPt2().getY();
+    var x1 = this.Pt1().X();
+    var y1 = this.Pt1().Y();
+    var x2 = this.Pt2().X();
+    var y2 = this.Pt2().Y();
+    var x3 = shape.Pt1().X();
+    var y3 = shape.Pt1().Y();
+    var x4 = shape.Pt2().X();
+    var y4 = shape.Pt2().Y();
 
     //check parrallel
     var denominator = (x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4);
@@ -170,8 +170,8 @@ Line.prototype.intersectsWith = function(shape){
 
 Line.prototype.containsPoint = function(point){
   //check if its even on the line
-  var changeX = this.getPt2().getX() - this.getPt1().getX();
-  var changeY = this.getPt2().getY() - this.getPt1().getY();
+  var changeX = this.Pt2().X() - this.Pt1().X();
+  var changeY = this.Pt2().Y() - this.Pt1().Y();
 
   var hX;
   var hY;
@@ -180,20 +180,20 @@ Line.prototype.containsPoint = function(point){
     //zey do nothing!
   }
   else if (changeX == 0){
-  hY = (point.getY() - this.getPt1().getY()) / changeY;
-    if (point.getX() == this.getPt1().getX() && hY > 0 && hY < 1){
+  hY = (point.Y() - this.Pt1().Y()) / changeY;
+    if (point.X() == this.Pt1().X() && hY > 0 && hY < 1){
       return true;
     }
   }
   else if (changeY == 0){
-  hX = (point.getX() - this.getPt1().getX()) / changeX;
-    if (point.getY() == this.getPt1().getY() && hX > 0 && hX < 1){
+  hX = (point.X() - this.Pt1().X()) / changeX;
+    if (point.Y() == this.Pt1().Y() && hX > 0 && hX < 1){
       return true;
     }
   }
   else{
-    hX = (point.getX() - this.getPt1().getX()) / changeX;
-    hY = (point.getY() - this.getPt1().getY()) / changeY;
+    hX = (point.X() - this.Pt1().X()) / changeX;
+    hY = (point.Y() - this.Pt1().Y()) / changeY;
 
     if (hX > 0 && hX < 1){
       return true;
@@ -204,6 +204,6 @@ Line.prototype.containsPoint = function(point){
 }
 
 Line.prototype.toString = function(){
-  return "Line: (" + this.getPt1().toString() + ", " + this.getPt2().toString() + ")"; 
+  return "Line: (" + this.Pt1().toString() + ", " + this.Pt2().toString() + ")"; 
 }
 
