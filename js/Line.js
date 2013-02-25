@@ -8,10 +8,6 @@ Line.prototype.Layer = function() {
   return this.layer 
 }
 
-Line.prototype.scetLayer = function(newLayer) {
-  this.layer = newLayer;
-}
-
 Line.prototype.Pt1 = function() {
   return this.pt1 
 }

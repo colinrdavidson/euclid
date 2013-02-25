@@ -7,10 +7,6 @@ Point.prototype.Layer = function() {
   return this.layer; 
 }
 
-Point.prototype.setLayer = function(newLayer) {
-  this.layer = newLayer;
-}
-
 Point.prototype.X = function() {
   return this.x; 
 }

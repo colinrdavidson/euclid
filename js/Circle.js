@@ -9,11 +9,7 @@ var Circle = function (layer, foc, loc){
 }
 
 Circle.prototype.Layer = function() {
-  return this.layer 
-}
-
-Circle.prototype.setLayer = function(newLayer) {
-  this.layer = newLayer;
+  return this.layer;
 }
 
 Circle.prototype.Foc = function() {
