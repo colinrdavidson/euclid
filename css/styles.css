@@ -1,0 +1,48 @@
+#canvasDiv{
+  width:400; 
+  height:400;
+  border:black 1px solid;
+}
+
+#initial{
+  z-index:1;
+  position:absolute;
+}
+
+#drawn{
+  z-index:2;
+  position:absolute;
+}
+
+#current{
+  z-index:3;
+  position:absolute;
+}
+
+#highlighted{
+  z-index:4;
+  position:absolute;
+}
+
+#user{
+  z-index:5;
+  position:absolute;
+}
+
+#buttonDiv{
+  height:30px; 
+  width:400px; 
+  border:black 1px solid;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+}
+
+#messageDiv{
+  height:30px; 
+  width:400px; 
+  border:black 1px solid;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+}
