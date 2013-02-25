@@ -4,10 +4,10 @@ function clickStart(pointArray){
   }
 } 
 
-function clickLine(ctx, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
+function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
   if (currentPoint1 && currentPoint2)
   {
-    var line = new Line(ctx, currentPoint1, currentPoint2);
+    var line = new Line(layer, currentPoint1, currentPoint2);
 
     var contains = false;
 
@@ -45,10 +45,10 @@ function clickLine(ctx, currentPoint1, currentPoint2, pointArray, lineArray, cir
   }
 }
 
-function clickCircle(ctx, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
+function clickCircle(layer, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
   if (currentPoint1 && currentPoint2)
   {
-    var circle = new Circle(ctx, currentPoint1, currentPoint2);
+    var circle = new Circle(layer, currentPoint1, currentPoint2);
 
     var contains = false;
 

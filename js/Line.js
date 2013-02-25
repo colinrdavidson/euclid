@@ -1,15 +1,15 @@
-var Line = function (ctx, pt1, pt2){
-  this.ctx = ctx;
+var Line = function (layer, pt1, pt2){
+  this.layer = layer;
   this.pt1 = pt1;
   this.pt2 = pt2;
 }
 
-Line.prototype.Ctx = function() {
-  return this.ctx 
+Line.prototype.Layer = function() {
+  return this.layer 
 }
 
-Line.prototype.scetCtx = function(newCtx) {
-  this.ctx = newCtx;
+Line.prototype.scetLayer = function(newLayer) {
+  this.layer = newLayer;
 }
 
 Line.prototype.Pt1 = function() {
@@ -38,19 +38,19 @@ Line.prototype.draw = function(colour) {
   }
 
   //local vars
-  var ctx = this.Ctx();
+  var layer = this.Layer();
   var pt1X = this.Pt1().X();
   var pt1Y = this.Pt1().Y();
   var pt2X = this.Pt2().X();
   var pt2Y = this.Pt2().Y();
 
   //draw the line
-  ctx.fillstyle = colour;
-  ctx.beginPath();
-  ctx.moveTo(pt1X, pt1Y);
-  ctx.lineTo(pt2X, pt2Y);
-  ctx.closePath();
-  ctx.stroke();
+  layer.fillstyle = colour;
+  layer.beginPath();
+  layer.moveTo(pt1X, pt1Y);
+  layer.lineTo(pt2X, pt2Y);
+  layer.closePath();
+  layer.stroke();
 }
 
 Line.prototype.intersectsWith = function(shape){
@@ -100,7 +100,7 @@ Line.prototype.intersectsWith = function(shape){
     var d = pointPointDistance(x1, y1, x3, y3);
 
     if (b == r){ //intersect at 1 point
-      var point = new Point(this.ctx, x3, y3); //projection is the only intersection
+      var point = new Point(this.layer, x3, y3); //projection is the only intersection
       
       //point in segment
       if (this.containsPoint(point)){
@@ -115,8 +115,8 @@ Line.prototype.intersectsWith = function(shape){
       var newX2 = x3 + dP3x*(offset/d);
       var newY2 = y3 + dP3y*(offset/d);
 
-      var point1 = new Point(this.ctx, newX1, newY1);
-      var point2 = new Point(this.ctx, newX2, newY2);
+      var point1 = new Point(this.layer, newX1, newY1);
+      var point2 = new Point(this.layer, newX2, newY2);
 
       //point1 in segment
       if (this.containsPoint(point1)){
@@ -147,7 +147,7 @@ Line.prototype.intersectsWith = function(shape){
       var newX = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4)) / denominator; 
       var newY = ((x1*y2 - y1*x2)*(y3-y4) - (y1-y2)*(x3*y4 - y3*x4)) / denominator; 
 
-      var point = new Point(this.ctx, newX, newY);
+      var point = new Point(this.layer, newX, newY);
 
       //points in segment
       if (this.containsPoint(point)){

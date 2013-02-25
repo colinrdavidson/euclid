@@ -1,19 +1,19 @@
-var Circle = function (ctx, foc, loc){
+var Circle = function (layer, foc, loc){
   //foc is for focus ie centre
   //loc is for loci ie point on circle
-  //TODO: overload function for (ctx, foc, rad) where rad is radius
+  //TODO: overload function for (layer, foc, rad) where rad is radius
 
-  this.ctx = ctx;
+  this.layer = layer;
   this.foc = foc;
   this.loc = loc;
 }
 
-Circle.prototype.Ctx = function() {
-  return this.ctx 
+Circle.prototype.Layer = function() {
+  return this.layer 
 }
 
-Circle.prototype.setCtx = function(newCtx) {
-  this.ctx = newCtx;
+Circle.prototype.setLayer = function(newLayer) {
+  this.layer = newLayer;
 }
 
 Circle.prototype.Foc = function() {
@@ -38,7 +38,7 @@ Circle.prototype.draw = function(colour) {
   }
   
   //local vars
-  var ctx = this.Ctx();
+  var layer = this.Layer();
   var focX = this.Foc().X();
   var focY = this.Foc().Y();
   var locX = this.Loc().X();
@@ -49,11 +49,11 @@ Circle.prototype.draw = function(colour) {
   var radius = Math.sqrt(Math.pow(focX - locX, 2) + Math.pow(focY - locY, 2));
 
   //draw the circle
-  ctx.fillStyle = colour;
-  ctx.beginPath();
-  ctx.arc(focX, focY, radius, 0, Math.PI*2, true);
-  ctx.closePath();
-  ctx.stroke();
+  layer.fillStyle = colour;
+  layer.beginPath();
+  layer.arc(focX, focY, radius, 0, Math.PI*2, true);
+  layer.closePath();
+  layer.stroke();
 }
 
 Circle.prototype.intersectsWith = function(shape){
@@ -118,8 +118,8 @@ Circle.prototype.intersectsWith = function(shape){
       var yi = y2 + ry;
       var yi_prime = y2 - ry;
 
-      var point1 = new Point(this.ctx, xi, yi);
-      var point2 = new Point(this.ctx, xi_prime, yi_prime);
+      var point1 = new Point(this.layer, xi, yi);
+      var point2 = new Point(this.layer, xi_prime, yi_prime);
 
       if (point1.isSame(point2)){
         pointsOfIntersection.push(point1);

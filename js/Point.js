@@ -1,14 +1,14 @@
-var Point = function(ctx, x, y){
-  this.ctx = ctx;
+var Point = function(layer, x, y){
+  this.layer = layer;
   this.x = Math.round(x*10000000)/10000000;
   this.y = Math.round(y*10000000)/10000000;
 }
-Point.prototype.Ctx = function() {
-  return this.ctx; 
+Point.prototype.Layer = function() {
+  return this.layer; 
 }
 
-Point.prototype.setCtx = function(newCtx) {
-  this.ctx = newCtx;
+Point.prototype.setLayer = function(newLayer) {
+  this.layer = newLayer;
 }
 
 Point.prototype.X = function() {
@@ -19,12 +19,12 @@ Point.prototype.Y = function() {
   return this.y; 
 }
 
-Point.prototype.copy = function(ctx) {
-  if (!ctx){
-    return new Point(this.ctx, this.x, this.y);
+Point.prototype.copy = function(layer) {
+  if (!layer){
+    return new Point(this.layer, this.x, this.y);
   }
   else
-    return new Point(ctx, this.x, this.y);
+    return new Point(layer, this.x, this.y);
 }
 
 Point.prototype.isSame = function(pt) {
@@ -43,16 +43,16 @@ Point.prototype.draw = function(colour) {
   }
 
   //local vars
-  var ctx = this.Ctx();
+  var layer = this.Layer();
   var x = this.X();
   var y = this.Y();
 
   //draw the point
-  ctx.fillStyle = colour;
-  ctx.beginPath();
-  ctx.arc(x, y, 5, 0, Math.PI*2, true);
-  ctx.closePath();
-  ctx.fill();
+  layer.fillStyle = colour;
+  layer.beginPath();
+  layer.arc(x, y, 5, 0, Math.PI*2, true);
+  layer.closePath();
+  layer.fill();
 }
 
 Point.prototype.toString = function(){
