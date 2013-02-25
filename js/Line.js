@@ -95,21 +95,12 @@ Line.prototype.intersectsWith = function(shape){
     //d is the dsiatnce from P1 to P3
     var d = pointPointDistance(x1, y1, x3, y3);
 
-    if (b == r){ //intersect at 1 point
-      var point = new Point(this.layer, x3, y3); //projection is the only intersection
-      
-      //point in segment
-      if (this.containsPoint(point)){
-        pointsOfIntersection.push(point);
-      }
-    }
-    else if (b < r){
-      //offset is the distance from P3 to the intersection
-      var offset = Math.sqrt(r*r - b*b);
-      var newX1 = x3 - dP3x*(offset/d);
-      var newY1 = y3 - dP3y*(offset/d);
-      var newX2 = x3 + dP3x*(offset/d);
-      var newY2 = y3 + dP3y*(offset/d);
+    if (d == 0){ //point1 of line is focus of circle
+      var offset = r/pointPointDistance(x1, y1, x2, y2);
+      var newX1 = x1 - dP2x*(offset);
+      var newY1 = y1 - dP2y*(offset);
+      var newX2 = x1 + dP2x*(offset);
+      var newY2 = y1 + dP2y*(offset);
 
       var point1 = new Point(this.layer, newX1, newY1);
       var point2 = new Point(this.layer, newX2, newY2);
@@ -122,6 +113,37 @@ Line.prototype.intersectsWith = function(shape){
       //point2 in segment
       if (this.containsPoint(point2)){
         pointsOfIntersection.push(point2);
+      }
+    }
+    else{
+      if (b == r){ //intersect at 1 point
+        var point = new Point(this.layer, x3, y3); //projection is the only intersection
+
+        //point in segment
+        if (this.containsPoint(point)){
+          pointsOfIntersection.push(point);
+        }
+      }
+      else if (b < r){
+        //offset is the distance from P3 to the intersection
+        var offset = Math.sqrt(r*r - b*b)/d;
+        var newX1 = x3 - dP3x*(offset);
+        var newY1 = y3 - dP3y*(offset);
+        var newX2 = x3 + dP3x*(offset);
+        var newY2 = y3 + dP3y*(offset);
+
+        var point1 = new Point(this.layer, newX1, newY1);
+        var point2 = new Point(this.layer, newX2, newY2);
+
+        //point1 in segment
+        if (this.containsPoint(point1)){
+          pointsOfIntersection.push(point1);
+        }
+
+        //point2 in segment
+        if (this.containsPoint(point2)){
+          pointsOfIntersection.push(point2);
+        }
       }
     }
   }
