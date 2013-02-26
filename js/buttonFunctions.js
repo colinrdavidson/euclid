@@ -1,10 +1,12 @@
 function clickStart(pointArray){
+  console.log("Clicked Start.");
   for(var i = 0; i < pointArray.length; i++){
     pointArray[i].draw();
   }
 } 
 
 function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
+  console.log("Clicked Line");
   if (currentPoint1 && currentPoint2)
   {
     var line = new Line(layer, currentPoint1, currentPoint2);
@@ -46,6 +48,7 @@ function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, c
 }
 
 function clickCircle(layer, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
+  console.log("Clicked Start");
   if (currentPoint1 && currentPoint2)
   {
     var circle = new Circle(layer, currentPoint1, currentPoint2);
