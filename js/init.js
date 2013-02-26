@@ -13,6 +13,18 @@ function init () {
 
   var canvasUser = $("#user")[0];
   var ctxUser = canvasUser.getContext("2d");
+
+  var contexts = {
+    0 : ctxInitial,
+    1 : ctxDrawn,
+    2 : ctxCurrent,
+    3 : ctxHighlighted,
+    4 : ctxUser
+  };
+
+  drawer = new Drawer();
+  drawer.initialize(contexts);
+
   //All mouse events occur on user layer as it is on top
 
   //Offset so we can compute location on canvas form location on screen
@@ -32,8 +44,8 @@ function init () {
   var currentPoint2 = null;
 
   //test points
-  var point1 = new Point(ctxInitial, 100, 200);
-  var point2 = new Point(ctxInitial, 300, 200);
+  var point1 = new Point(0, 100, 200);
+  var point2 = new Point(0, 300, 200);
   pointArray.push(point1, point2);
 
   //Button Events
