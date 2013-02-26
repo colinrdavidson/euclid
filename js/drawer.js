@@ -1,9 +1,18 @@
 var Drawer = function () {
-  var contexts = {};
+  var layers = {};
+  var height;
+  var width;
 }
 
-Drawer.prototype.initialize = function (canvasList){
-  this.contexts = canvasList;
+Drawer.prototype.initialize = function (canvasList, height, width){
+  this.layers = canvasList;
+  this.height = height;
+  this.width = width;
+}
+
+Drawer.prototype.clearLayer = function (layerToClear){
+  var context = this.layers[layerToClear];
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
 }
 
 Drawer.prototype.draw = function (object, colour){
@@ -12,7 +21,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   if (object instanceof Point){
-    var layer = this.contexts[object.Layer()];
+    var layer = this.layers[object.Layer()];
     var x = object.X();
     var y = object.Y();
 
@@ -25,11 +34,11 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Line){
-    var layer = this.contexts[object.Layer()];
-    var pt1x = object.Pt1().X();
-    var pt1y = object.Pt1().Y();
-    var pt2x = object.Pt2().X();
-    var pt2y = object.Pt2().Y();
+    var layer = this.layers[object.Layer()];
+    var pt1X = object.Pt1().X();
+    var pt1Y = object.Pt1().Y();
+    var pt2X = object.Pt2().X();
+    var pt2Y = object.Pt2().Y();
 
     //draw the line
     layer.fillstyle = colour;
@@ -41,7 +50,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Circle){
-    var layer = this.contexts[object.Layer()];
+    var layer = this.layers[object.Layer()];
     var focX = object.Foc().X();
     var focY = object.Foc().Y();
     var locX = object.Loc().X();
