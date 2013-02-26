@@ -28,6 +28,8 @@ function init () {
   //All mouse events occur on user layer as it is on top
 
   //Offset so we can compute location on canvas form location on screen
+  var width = canvasUser.width;
+  var height = canvasUser.height;
   var offsetTop = canvasInitial.offsetTop;
   var offsetLeft = canvasInitial.offsetLeft;
 
@@ -54,28 +56,31 @@ function init () {
   });
 
   $("#lineButton").click(function (){ 
-    clickLine(ctxDrawn, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints); 
+    clickLine(1, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints); 
   });
 
   $("#circleButton").click(function (){ 
-    clickCircle(ctxDrawn, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints);
+    clickCircle(1, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints);
   });
 
   //Mouse Events
   $("#user").mousemove(function (e){ 
-    mouseOverPoint = mouseMove(ctxHighlighted, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop);
-    drawHighlighted(ctxHighlighted, mouseOverPoint);
+    mouseOverPoint = mouseMove(3, pointArray, e.pageX - offsetLeft, e.pageY - offsetTop);
+    drawer.clearLayer(3);
+    if (mouseOverPoint){
+      drawer.draw(mouseOverPoint, "#0000FF");
+    }
   });
 
   $("#user").mousedown(function (e){
     if (mouseOverPoint){
-      var clickedPoints = clickCanvas(ctxCurrent, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
+      var clickedPoints = clickCanvas(2, pointArray, lineArray, circleArray,  mouseOverPoint, currentPoint1, currentPoint2);
       currentPoint1 = clickedPoints[0];
       currentPoint2 = clickedPoints[1];
 
       ctxCurrent.clearRect(0,0,400,400);
-      if (currentPoint1) currentPoint1.draw("#00FF00");
-      if (currentPoint2) currentPoint2.draw("#FF0000");
+      if (currentPoint1) drawer.draw(currentPoint1, "#00FF00");
+      if (currentPoint2) drawer.draw(currentPoint2, "#FF0000");
     }
   });
 }
