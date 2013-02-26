@@ -145,7 +145,7 @@ Line.prototype.intersectsWith = function(shape){
       var point = new Point(this.layer, newX, newY);
 
       //points in segment
-      if (this.containsPoint(point)){
+      if (this.containsPoint(point) && shape.containsPoint(point)){
         pointsOfIntersection.push(point);
       }
 
