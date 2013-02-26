@@ -34,7 +34,7 @@ function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, c
             if (!intersections[j].isInArray(pointArray)){
               pointArray.push(intersections[j]);
               console.log(intersections[j].toString());
-              intersections[j].draw();
+              drawer.draw(intersections[j]);
             }
           }
         }
@@ -42,7 +42,7 @@ function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, c
 
       lineArray.push(line);
       console.log(line.toString());
-      line.draw();
+      drawer.draw(line);
     }
   }
 }
@@ -75,13 +75,13 @@ function clickCircle(layer, currentPoint1, currentPoint2, pointArray, lineArray,
           if (!intersections[j].isInArray(pointArray)){
             pointArray.push(intersections[j]);
             console.log(intersections[j].toString());
-            intersections[j].draw();
+            drawer.draw(intersections[j]);
           }
         }
       }
       circleArray.push(circle);
       console.log(circle.toString());
-      circle.draw();
+      drawer.draw(circle);
     }
   }
 }
