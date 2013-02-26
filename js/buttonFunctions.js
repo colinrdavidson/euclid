@@ -1,7 +1,7 @@
 function clickStart(pointArray){
   console.log("Clicked Start.");
   for(var i = 0; i < pointArray.length; i++){
-    pointArray[i].draw();
+    drawer.draw(pointArray[i]);
   }
 } 
 
