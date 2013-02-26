@@ -1,4 +1,4 @@
-var function Drawer () {
+var Drawer = function () {
   var contexts = {};
 }
 
@@ -12,7 +12,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   if (object instanceof Point){
-    var layer = object.Layer();
+    var layer = this.contexts[object.Layer()];
     var x = object.X();
     var y = object.Y();
 
@@ -25,7 +25,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Line){
-    var layer = object.Layer();
+    var layer = this.contexts[object.Layer()];
     var pt1x = object.Pt1().X();
     var pt1y = object.Pt1().Y();
     var pt2x = object.Pt2().X();
@@ -41,7 +41,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Circle){
-    var layer = object.Layer();
+    var layer = this.contexts[object.Layer()];
     var focX = object.Foc().X();
     var focY = object.Foc().Y();
     var locX = object.Loc().X();
