@@ -11,3 +11,15 @@ function ArrayContains(array, object)
     return false;
   }
 }
+
+
+function ObjectCount(object){
+  var count = 0;
+  for (var el in object){
+    if (object.hasOwnProperty(el)){
+      count++;
+    }
+  }
+
+  return count;
+}
