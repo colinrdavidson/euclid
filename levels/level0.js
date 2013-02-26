@@ -9,7 +9,7 @@ var level0 = {
   },
   lines:
   {
-    0: { p1: 0, p2: 1 } 
+    0: { pt1: 0, pt2: 1 } 
   },
   circles:
   {

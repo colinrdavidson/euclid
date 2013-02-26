@@ -50,7 +50,7 @@ State.prototype.addPotentialPoint = function (point) {
 
 State.prototype.addLine = function (line) {
   if (line instanceof Line){
-    this.lines.push(linet);
+    this.lines.push(line);
   }
   else {
     console.log("not a line.");
