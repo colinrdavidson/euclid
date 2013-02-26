@@ -1,4 +1,4 @@
-function ArrayContains(array, object)
+function arrayContains(array, object)
 {
   if (array && object)
   {
@@ -13,7 +13,7 @@ function ArrayContains(array, object)
 }
 
 
-function ObjectCount(object){
+function objectCount(object){
   var count = 0;
   for (var el in object){
     if (object.hasOwnProperty(el)){

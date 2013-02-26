@@ -28,14 +28,14 @@ LevelParse = function (level) {
 
   var points = level.points;
   if (points){
-    for (var i = 0; i < ObjectCount(points); i++){
+    for (var i = 0; i < objectCount(points); i++){
       state.addPoint(new Point(points[i].x, points[i].y));
     }
   }
   var lines = level.lines;
 
   if (lines){
-    for (var i = 0; i < ObjectCount(lines); i++){
+    for (var i = 0; i < objectCount(lines); i++){
       var point1 = state.Points()[lines[i].pt1];
       var point2 = state.Points()[lines[i].pt2];
 
@@ -50,7 +50,7 @@ LevelParse = function (level) {
 
   var circles = level.circles;
   if (circles){
-    for (var i = 0; i < ObjectCount(circles); i++){
+    for (var i = 0; i < objectCount(circles); i++){
       var foc = state.Points()[circles[i].foc];
       var loc = state.Points()[circles[i].loc];
 
