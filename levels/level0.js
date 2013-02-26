@@ -1,4 +1,6 @@
-{
+levelArray = [];
+
+var level0 = {
   name: "Level0",
   points:
   {
@@ -25,3 +27,5 @@
     }
   }
 }
+
+levelArray.push(level0);
