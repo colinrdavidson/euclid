@@ -26,29 +26,6 @@ Line.prototype.isSame = function(Ln) {
   else return false;
 }
 
-Line.prototype.draw = function(colour) {
-  //colour is string "#RRGGBB"
-
-  if (!colour){
-    colour = "#000000";
-  }
-
-  //local vars
-  var layer = this.Layer();
-  var pt1X = this.Pt1().X();
-  var pt1Y = this.Pt1().Y();
-  var pt2X = this.Pt2().X();
-  var pt2Y = this.Pt2().Y();
-
-  //draw the line
-  layer.fillstyle = colour;
-  layer.beginPath();
-  layer.moveTo(pt1X, pt1Y);
-  layer.lineTo(pt2X, pt2Y);
-  layer.closePath();
-  layer.stroke();
-}
-
 Line.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
   var x1 = this.Pt1().X();

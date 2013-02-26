@@ -25,33 +25,6 @@ Circle.prototype.isSame = function(Cir) {
   else return false;
 }
 
-
-
-Circle.prototype.draw = function(colour) {
-  //colour is string "#RRGGBB"
-  if (!colour){
-    colour = "#000000";
-  }
-  
-  //local vars
-  var layer = this.Layer();
-  var focX = this.Foc().X();
-  var focY = this.Foc().Y();
-  var locX = this.Loc().X();
-  var locY = this.Loc().Y();
-  
-
-  //compute radius
-  var radius = Math.sqrt(Math.pow(focX - locX, 2) + Math.pow(focY - locY, 2));
-
-  //draw the circle
-  layer.fillStyle = colour;
-  layer.beginPath();
-  layer.arc(focX, focY, radius, 0, Math.PI*2, true);
-  layer.closePath();
-  layer.stroke();
-}
-
 Circle.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
 

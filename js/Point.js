@@ -30,27 +30,6 @@ Point.prototype.isSame = function(pt) {
     return false; 
 }
 
-  
-Point.prototype.draw = function(colour) {
-  //colour is string "#RRGGBB"
-
-  if (!colour){
-    colour = "#000000";
-  }
-
-  //local vars
-  var layer = this.Layer();
-  var x = this.X();
-  var y = this.Y();
-
-  //draw the point
-  layer.fillStyle = colour;
-  layer.beginPath();
-  layer.arc(x, y, 5, 0, Math.PI*2, true);
-  layer.closePath();
-  layer.fill();
-}
-
 Point.prototype.toString = function(){
   return "Point: (" + this.X() + ", " + this.Y() + ")";
 }
