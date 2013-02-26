@@ -1,14 +1,15 @@
-levelArray = [];
+Levels = {}; 
 
 var level0 = {
   name: "Level0",
   points:
   {
-    0: [100, 200],
-    1: [300, 200]
+    0: { x: 100, y: 200 },
+    1: { x: 300, y: 200 },
   },
   lines:
   {
+    0: { p1: 0, p2: 1 } 
   },
   circles:
   {
@@ -17,7 +18,7 @@ var level0 = {
   {
     points:
     {
-      0: [200, 200]
+      0: { x: 200, y: 200 } 
     },
     lines:
     {
@@ -27,5 +28,4 @@ var level0 = {
     }
   }
 }
-
-levelArray.push(level0);
+Levels[level0.name] = level0;
