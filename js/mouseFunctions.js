@@ -25,14 +25,12 @@ function clickCanvas (layer, pointArray, lineArray, circleArray, mouseOverPoint,
 }
 
 function mouseMove (layer, pointArray, x, y){
-  var i = 0;
-  while (i <= pointArray.length - 1){
+  for (var i = 0; i <= pointArray.length - 1; i++){
     var currPoint = pointArray[i];
 
     if (pointPointDistance(x, y, currPoint.X(), currPoint.Y()) <= 5){
       return currPoint.copy(layer);
     }
-    i++;
   }
   return null;
 }
