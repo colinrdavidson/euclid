@@ -64,5 +64,17 @@ Drawer.prototype.draw = function (object, colour){
     layer.closePath();
     layer.stroke();
   }
+
+  else if (object instanceof State){
+    this.draw(object.Points());
+    this.draw(object.Lines());
+    this.draw(object.Circles());
+  }
+
+  else if (object instanceof Array){
+    for (var i = 0; i < object.length; i++){
+      this.draw(object[i]);
+    }
+  }
 }
   
