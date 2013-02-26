@@ -29,7 +29,7 @@ LevelParse = function (level) {
   var points = level.points;
   if (points){
     for (var i = 0; i < objectCount(points); i++){
-      state.addPoint(new Point(points[i].x, points[i].y));
+      state.addPoint(new Point(0, points[i].x, points[i].y));
     }
   }
   var lines = level.lines;
@@ -40,7 +40,20 @@ LevelParse = function (level) {
       var point2 = state.Points()[lines[i].pt2];
 
       if (point1 && point2){
-        state.addLine(new Line(point1, point2));  
+        var newLine = new Line(0, point1, point2);
+
+        for (var i = 0; i < state.Lines().length; i++){
+          var potentialPoints = newLine.intersectsWith(state.Lines()[i]);
+
+          if (potentialPoints){
+            for (var j = 0; j < potentialPoints.length; j++){
+              if (!potentialPoints[j].isInArray(state.potentialPoints)){
+                state.addPotentialPoint(potentialPoints[i]);  
+              }
+            }
+          }
+        }
+        state.addLine(newLine);  
       }
       else{
         console.log("those points don't exist");
@@ -54,7 +67,31 @@ LevelParse = function (level) {
       var foc = state.Points()[circles[i].foc];
       var loc = state.Points()[circles[i].loc];
 
-      if (point1 && point2){
+      if (foc && loc){
+        var newCircle = new Circle(0, foc, loc);
+
+        for (var i = 0; i < state.Lines().length; i++){
+          var potentialPoints = newCircle.intersectsWith(state.Lines()[i]);
+
+          if (potentialPoints){
+            for (var j = 0; j < potentialPoints.length; j++){
+              if (!potentialPoints[j].isInArray(state.potentialPoints)){
+                state.addPotentialPoint(potentialPoints[i]);  
+              }
+            }
+          }
+        }
+        for (var i = 0; i < state.Circles.length; i++){
+          var potentialPoints = newCircle.intersectsWith(state.lines[i]);
+
+          if (potentialPoints){
+            for (var j = 0; j < potentialPoints.length; j++){
+              if (!potentialPoints[j].isInArray(state.potentialPoints)){
+                state.addPotentialPoint(potentialPoints[i]);  
+              }
+            }
+          }
+        }
         state.addLine(new Circle(foc, loc));  
       }
       else{
