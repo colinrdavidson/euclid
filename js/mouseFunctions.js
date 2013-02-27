@@ -1,4 +1,4 @@
-function clickCanvas (layer, pointArray, lineArray, circleArray, mouseOverPoint, pt1, pt2){
+function clickCanvas (layer, mouseOverPoint, pt1, pt2){
   if (!pt2) {
     console.log("First point added:", mouseOverPoint.toString());
     return [null, mouseOverPoint.copy(layer)];
@@ -24,9 +24,9 @@ function clickCanvas (layer, pointArray, lineArray, circleArray, mouseOverPoint,
   }
 }
 
-function mouseMove (layer, pointArray, x, y){
-  for (var i = 0; i <= pointArray.length - 1; i++){
-    var currPoint = pointArray[i];
+function mouseMove (layer, x, y){
+  for (var i = 0; i < game.points.length; i++){
+    var currPoint = game.points[i];
 
     if (pointPointDistance(x, y, currPoint.x, currPoint.y) <= 5){
       return currPoint.copy(layer);
