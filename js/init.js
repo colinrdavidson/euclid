@@ -25,6 +25,12 @@ function init () {
   drawer = new Drawer();
   drawer.initialize(contexts);
 
+  game = new Game();
+  game.loadLevel("Level0");
+
+  drawer.draw(game.state);
+  drawer.draw(game.state.potentialPoints);
+
   //All mouse events occur on user layer as it is on top
 
   //Offset so we can compute location on canvas form location on screen
