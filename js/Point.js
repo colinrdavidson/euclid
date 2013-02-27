@@ -3,17 +3,6 @@ var Point = function(layer, x, y){
   this.x = Math.round(x*10000000)/10000000;
   this.y = Math.round(y*10000000)/10000000;
 }
-Point.prototype.Layer = function () {
-  return this.layer; 
-}
-
-Point.prototype.X = function () {
-  return this.x; 
-}
-
-Point.prototype.Y = function () {
-  return this.y; 
-}
 
 Point.prototype.copy = function (layer) {
   if (!layer){
@@ -24,14 +13,14 @@ Point.prototype.copy = function (layer) {
 }
 
 Point.prototype.isSame = function (pt) {
-  if ((pt instanceof Point) && (this.x == pt.X() && this.y == pt.Y()))
+  if ((pt instanceof Point) && (this.x == pt.x && this.y == pt.y))
     return true;
   else
     return false; 
 }
 
 Point.prototype.toString = function (){
-  return "Point: (" + this.X() + ", " + this.Y() + ")";
+  return "Point: (" + this.x + ", " + this.y + ")";
 }
 
 Point.prototype.isInArray = function (array){

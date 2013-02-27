@@ -28,7 +28,7 @@ function mouseMove (layer, pointArray, x, y){
   for (var i = 0; i <= pointArray.length - 1; i++){
     var currPoint = pointArray[i];
 
-    if (pointPointDistance(x, y, currPoint.X(), currPoint.Y()) <= 5){
+    if (pointPointDistance(x, y, currPoint.x, currPoint.y) <= 5){
       return currPoint.copy(layer);
     }
   }

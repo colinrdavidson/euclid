@@ -21,9 +21,9 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   if (object instanceof Point){
-    var layer = this.layers[object.Layer()];
-    var x = object.X();
-    var y = object.Y();
+    var layer = this.layers[object.layer];
+    var x = object.x;
+    var y = object.y;
 
     //draw the point
     layer.fillStyle = colour;
@@ -34,11 +34,11 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Line){
-    var layer = this.layers[object.Layer()];
-    var pt1X = object.Pt1().X();
-    var pt1Y = object.Pt1().Y();
-    var pt2X = object.Pt2().X();
-    var pt2Y = object.Pt2().Y();
+    var layer = this.layers[object.layer];
+    var pt1X = object.pt1.x;
+    var pt1Y = object.pt1.y;
+    var pt2X = object.pt2.x;
+    var pt2Y = object.pt2.y;
 
     //draw the line
     layer.fillstyle = colour;
@@ -50,11 +50,11 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof Circle){
-    var layer = this.layers[object.Layer()];
-    var focX = object.Foc().X();
-    var focY = object.Foc().Y();
-    var locX = object.Loc().X();
-    var locY = object.Loc().Y();
+    var layer = this.layers[object.layer];
+    var focX = object.foc.x;
+    var focY = object.foc.y;
+    var locX = object.loc.x;
+    var locY = object.loc.y;
     var radius = Math.sqrt(Math.pow(focX - locX, 2) + Math.pow(focY - locY, 2));
 
     //draw the circle

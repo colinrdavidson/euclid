@@ -8,20 +8,8 @@ var Circle = function (layer, foc, loc){
   this.loc = loc;
 }
 
-Circle.prototype.Layer = function() {
-  return this.layer;
-}
-
-Circle.prototype.Foc = function() {
-  return this.foc 
-}
-
-Circle.prototype.Loc = function() {
-  return this.loc 
-}
-
 Circle.prototype.isSame = function(Cir) {
-  if (this.foc.isSame(Cir.Foc()) && this.loc.isSame(Cir.Loc())) return true;
+  if (this.foc.isSame(Cir.foc) && this.loc.isSame(Cir.loc)) return true;
   else return false;
 }
 
@@ -29,12 +17,12 @@ Circle.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
 
   if (shape instanceof Circle){
-    var x0 = this.Foc().X();
-    var y0 = this.Foc().Y();
-    var r0 = pointPointDistance(this.Foc().X(), this.Foc().Y(), this.Loc().X(), this.Loc().Y());
-    var x1 = shape.Foc().X(); 
-    var y1 = shape.Foc().Y();
-    var r1 = pointPointDistance(shape.Foc().X(), shape.Foc().Y(), shape.Loc().X(), shape.Loc().Y());
+    var x0 = this.foc.x;
+    var y0 = this.foc.y;
+    var r0 = pointPointDistance(this.foc.x, this.foc.y, this.loc.x, this.loc.y);
+    var x1 = shape.foc.x; 
+    var y1 = shape.foc.y;
+    var r1 = pointPointDistance(shape.foc.x, shape.foc.y, shape.loc.x, shape.loc.y);
     var a, dx, dy, d, h, rx, ry;
     var x2, y2;
 
@@ -111,5 +99,5 @@ Circle.prototype.intersectsWith = function(shape){
 }
 
 Circle.prototype.toString = function() {
-  return "Circle: (" + this.Foc().toString() + ", " + this.Loc().toString() + ")";
+  return "Circle: (" + this.foc.toString() + ", " + this.loc.toString() + ")";
 }
