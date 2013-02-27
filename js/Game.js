@@ -28,14 +28,18 @@ LevelParse = function (level) {
 
   var points = level.points;
   if (points){
-    for (var i = 0; i < objectCount(points); i++){
+    var pointCount = objectCount(points);  
+
+    for (var i = 0; i < pointCount; i++){
       state.addPoint(new Point(0, points[i].x, points[i].y));
     }
   }
   var lines = level.lines;
 
   if (lines){
-    for (var i = 0; i < objectCount(lines); i++){
+    var lineCount = objectCount(lines);
+
+    for (var i = 0; i < lineCount; i++){
       var point1 = state.Points()[lines[i].pt1];
       var point2 = state.Points()[lines[i].pt2];
 
@@ -48,7 +52,7 @@ LevelParse = function (level) {
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
               if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[i]);  
+                state.addPotentialPoint(potentialPoints[j]);  
               }
             }
           }
@@ -63,7 +67,9 @@ LevelParse = function (level) {
 
   var circles = level.circles;
   if (circles){
-    for (var i = 0; i < objectCount(circles); i++){
+    var circleCount = objectCount(circles);
+
+    for (var i = 0; i < circleCount; i++){
       var foc = state.Points()[circles[i].foc];
       var loc = state.Points()[circles[i].loc];
 
@@ -76,7 +82,7 @@ LevelParse = function (level) {
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
               if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[i]);  
+                state.addPotentialPoint(potentialPoints[j]);  
               }
             }
           }
@@ -87,12 +93,12 @@ LevelParse = function (level) {
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
               if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[i]);  
+                state.addPotentialPoint(potentialPoints[j]);  
               }
             }
           }
         }
-        state.addLine(new Circle(foc, loc));  
+        state.addCircle(newCircle);
       }
       else{
         console.log("those points don't exist");
