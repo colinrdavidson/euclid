@@ -114,5 +114,10 @@ Game.prototype.levelParse = function (level) {
 }
 
 Game.prototype.draw = function (object){
-  this.drawer.draw(object);
+  if (!object){
+    this.drawer.draw(game.state);
+  }
+  else{
+    this.drawer.draw(object);
+  }
 }

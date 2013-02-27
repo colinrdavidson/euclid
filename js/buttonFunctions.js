@@ -1,15 +1,16 @@
-function clickStart(pointArray){
+function clickStart(state){
   console.log("Clicked Start.");
   for(var i = 0; i < pointArray.length; i++){
-    drawer.draw(pointArray[i]);
+    ;
   }
 } 
 
-function clickLine(layer, currentPoint1, currentPoint2, pointArray, lineArray, circleArray, intersectionPoints){
+function clickLine(layer, currentPoint1, currentPoint2, state){
   console.log("Clicked Line");
   if (currentPoint1 && currentPoint2)
   {
     var line = new Line(layer, currentPoint1, currentPoint2);
+    
 
     var contains = false;
 

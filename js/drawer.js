@@ -14,6 +14,51 @@ Drawer.prototype.clearLayer = function (layerToClear){
   var context = this.layers[layerToClear];
   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
 }
+  
+Drawer.prototype.drawPoint = function (object, colour){
+  var layer = this.layers[object.Layer()];
+  var x = object.X();
+  var y = object.Y();
+
+  //draw the point
+  layer.fillStyle = colour;
+  layer.beginPath();
+  layer.arc(x, y, 5, 0, Math.PI*2, true);
+  layer.closePath();
+  layer.fill();
+}
+
+Drawer.prototype.drawLine = function (object, colour){
+  var layer = this.layers[object.Layer()];
+  var pt1X = object.Pt1().X();
+  var pt1Y = object.Pt1().Y();
+  var pt2X = object.Pt2().X();
+  var pt2Y = object.Pt2().Y();
+
+  //draw the line
+  layer.fillstyle = colour;
+  layer.beginPath();
+  layer.moveTo(pt1X, pt1Y);
+  layer.lineTo(pt2X, pt2Y);
+  layer.closePath();
+  layer.stroke();
+}
+
+Drawer.prototype.drawCircle = function (object, colour){
+  var layer = this.layers[object.Layer()];
+  var focX = object.Foc().X();
+  var focY = object.Foc().Y();
+  var locX = object.Loc().X();
+  var locY = object.Loc().Y();
+  var radius = Math.sqrt(Math.pow(focX - locX, 2) + Math.pow(focY - locY, 2));
+
+  //draw the circle
+  layer.fillStyle = colour;
+  layer.beginPath();
+  layer.arc(focX, focY, radius, 0, Math.PI*2, true);
+  layer.closePath();
+  layer.stroke();
+}
 
 Drawer.prototype.draw = function (object, colour){
   if (!colour){
@@ -21,6 +66,7 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   if (object instanceof Point){
+<<<<<<< HEAD
     var layer = this.layers[object.layer];
     var x = object.x;
     var y = object.y;
@@ -63,18 +109,29 @@ Drawer.prototype.draw = function (object, colour){
     layer.arc(focX, focY, radius, 0, Math.PI*2, true);
     layer.closePath();
     layer.stroke();
+=======
+    this.drawPoint(object, colour);
+  }
+
+  else if (object instanceof Line){
+    this.drawLine(object, colour);
+  }
+
+  else if (object instanceof Circle){
+    this.drawCircle(object, colour);
+>>>>>>> Game.draw() now draws the whole state;
   }
 
   else if (object instanceof State){
-    this.draw(object.points);
-    this.draw(object.lines);
-    this.draw(object.circles);
+    this.draw(object.points, colour);
+    this.draw(object.lines, colour);
+    this.draw(object.circles, colour);
   }
 
   else if (object instanceof Array){
     for (var i = 0; i < object.length; i++){
-      this.draw(object[i]);
+      this.draw(object[i], colour);
     }
   }
 }
-  
+
