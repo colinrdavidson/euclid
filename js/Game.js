@@ -1,9 +1,6 @@
-var Game = function () {
-  //assuming 
- // this.drawer = drawer;
-  //this.state = new State();
-  // State
-  //currentlevel
+var Game = function (drawer) {
+  this.drawer = drawer;
+  this.state = new State();
 }
 
 Game.prototype.loadLevel = function (levelName) {
