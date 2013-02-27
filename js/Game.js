@@ -20,7 +20,15 @@ Game.prototype.loadLevel = function (levelName) {
 }
 
 Game.prototype.addPoint = function (point) {
+  this.state.addPoint(point);
+}
 
+Game.prototype.addLine = function (line) {
+  this.state.addLine(line);
+}
+
+Game.prototype.addCircle = function (circle) {
+  this.state.addCircle(circle);
 }
 
 Game.prototype.levelParse = function (level) {
@@ -35,6 +43,7 @@ Game.prototype.levelParse = function (level) {
       state.addPoint(new Point(0, points[i].x, points[i].y));
     }
   }
+
   var lines = level.lines;
 
   if (lines){
@@ -46,19 +55,7 @@ Game.prototype.levelParse = function (level) {
 
       if (point1 && point2){
         var newLine = new Line(0, point1, point2);
-
-        for (var i = 0; i < state.lines.length; i++){
-          var potentialPoints = newLine.intersectsWith(state.lines[i]);
-
-          if (potentialPoints){
-            for (var j = 0; j < potentialPoints.length; j++){
-              if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[j]);  
-              }
-            }
-          }
-        }
-        state.addLine(newLine);  
+        state.addline(newLine);
       }
       else{
         console.log("those points don't exist");
@@ -76,29 +73,6 @@ Game.prototype.levelParse = function (level) {
 
       if (foc && loc){
         var newCircle = new Circle(0, foc, loc);
-
-        for (var i = 0; i < state.lines.length; i++){
-          var potentialPoints = newCircle.intersectsWith(state.lines[i]);
-
-          if (potentialPoints){
-            for (var j = 0; j < potentialPoints.length; j++){
-              if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[j]);  
-              }
-            }
-          }
-        }
-        for (var i = 0; i < state.circles.length; i++){
-          var potentialPoints = newCircle.intersectsWith(state.lines[i]);
-
-          if (potentialPoints){
-            for (var j = 0; j < potentialPoints.length; j++){
-              if (!potentialPoints[j].isInArray(state.potentialPoints)){
-                state.addPotentialPoint(potentialPoints[j]);  
-              }
-            }
-          }
-        }
         state.addCircle(newCircle);
       }
       else{
