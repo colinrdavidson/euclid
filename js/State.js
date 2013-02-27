@@ -5,22 +5,6 @@ var State = function () {
   this.circles = [];
 }
 
-State.prototype.Points = function () {
-  return this.points;
-}
-
-State.prototype.PotentialPoints = function () {
-  return this.potentialPoints;
-}
-
-State.prototype.Lines = function () {
-  return this.lines;
-}
-
-State.prototype.Circles = function () {
-  return this.circles;
-}
-
 State.prototype.addCircle = function (circle) {
   if (circle instanceof Circle){
     this.circles.push(circle);

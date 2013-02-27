@@ -14,7 +14,7 @@ Game.prototype.loadLevel = function (levelName) {
   this.currentLevel = level;
   
   if (level){
-   this.state = LevelParse(level);
+   this.state = this.levelParse(level);
    //this.drawer.Draw(this.state);
   }
   else{
@@ -22,7 +22,11 @@ Game.prototype.loadLevel = function (levelName) {
   }
 }
 
-LevelParse = function (level) {
+Game.prototype.addPoint = function (point) {
+
+}
+
+Game.prototype.levelParse = function (level) {
   // turns this object into a state
   var state = new State();
 
@@ -40,14 +44,14 @@ LevelParse = function (level) {
     var lineCount = objectCount(lines);
 
     for (var i = 0; i < lineCount; i++){
-      var point1 = state.Points()[lines[i].pt1];
-      var point2 = state.Points()[lines[i].pt2];
+      var point1 = state.points[lines[i].pt1];
+      var point2 = state.points[lines[i].pt2];
 
       if (point1 && point2){
         var newLine = new Line(0, point1, point2);
 
-        for (var i = 0; i < state.Lines().length; i++){
-          var potentialPoints = newLine.intersectsWith(state.Lines()[i]);
+        for (var i = 0; i < state.lines.length; i++){
+          var potentialPoints = newLine.intersectsWith(state.lines[i]);
 
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
@@ -70,14 +74,14 @@ LevelParse = function (level) {
     var circleCount = objectCount(circles);
 
     for (var i = 0; i < circleCount; i++){
-      var foc = state.Points()[circles[i].foc];
-      var loc = state.Points()[circles[i].loc];
+      var foc = state.points[circles[i].foc];
+      var loc = state.points[circles[i].loc];
 
       if (foc && loc){
         var newCircle = new Circle(0, foc, loc);
 
-        for (var i = 0; i < state.Lines().length; i++){
-          var potentialPoints = newCircle.intersectsWith(state.Lines()[i]);
+        for (var i = 0; i < state.lines.length; i++){
+          var potentialPoints = newCircle.intersectsWith(state.lines[i]);
 
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
@@ -87,7 +91,7 @@ LevelParse = function (level) {
             }
           }
         }
-        for (var i = 0; i < state.Circles.length; i++){
+        for (var i = 0; i < state.circles.length; i++){
           var potentialPoints = newCircle.intersectsWith(state.lines[i]);
 
           if (potentialPoints){

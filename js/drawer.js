@@ -66,9 +66,9 @@ Drawer.prototype.draw = function (object, colour){
   }
 
   else if (object instanceof State){
-    this.draw(object.Points());
-    this.draw(object.Lines());
-    this.draw(object.Circles());
+    this.draw(object.points);
+    this.draw(object.lines);
+    this.draw(object.circles);
   }
 
   else if (object instanceof Array){
