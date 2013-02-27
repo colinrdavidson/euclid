@@ -9,9 +9,21 @@ Line.prototype.slope = function() {
 }
 
 Line.prototype.isSame = function(Ln) {
+<<<<<<< HEAD
   if (this.pt1.isSame(Ln.pt1) && this.pt2.isSame(Ln.pt2)) return true;
   else if (this.pt1.isSame(Ln.pt2) && this.pt2.isSame(Ln.pt1)) return true;
   else return false;
+=======
+  if ((Ln instanceof Line) && this.pt1.isSame(Ln.Pt1()) && this.pt2.isSame(Ln.Pt2())){
+    return true;
+  }
+  else if (this.pt1.isSame(Ln.Pt2()) && this.pt2.isSame(Ln.Pt1())){
+    return true;
+  }
+  else{
+    return false;
+  }
+>>>>>>> POint line and circle all have isInArray now and isSame checks for object type.
 }
 
 Line.prototype.intersectsWith = function(shape){
@@ -190,3 +202,11 @@ Line.prototype.toString = function(){
   return "Line: (" + this.pt1.toString() + ", " + this.pt2.toString() + ")"; 
 }
 
+Line.prototype.isInArray = function (array){
+  for(var i = 0; i < array.length; i++){
+    if (this.isSame(array[i]))
+      return true;
+  }
+
+  return false;
+}

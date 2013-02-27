@@ -11,6 +11,13 @@ var Circle = function (layer, foc, loc){
 Circle.prototype.isSame = function(Cir) {
   if (this.foc.isSame(Cir.foc) && this.loc.isSame(Cir.loc)) return true;
   else return false;
+  if ((Cir instanceof Circle) this.foc.isSame(Cir.Foc()) && this.loc.isSame(Cir.Loc())){
+    return true;
+  }
+  else{
+    return false;
+  }
+>>>>>>> POint line and circle all have isInArray now and isSame checks for object type.
 }
 
 Circle.prototype.intersectsWith = function(shape){
@@ -100,4 +107,14 @@ Circle.prototype.intersectsWith = function(shape){
 
 Circle.prototype.toString = function() {
   return "Circle: (" + this.foc.toString() + ", " + this.loc.toString() + ")";
+}
+
+Circle.prototype.isInArray = function (array){
+  //assume this array is full of points
+  for(var i = 0; i < array.length; i++){
+    if (this.isSame(array[i]))
+      return true;
+  }
+
+  return false;
 }

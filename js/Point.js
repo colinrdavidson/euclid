@@ -15,8 +15,10 @@ Point.prototype.copy = function (layer) {
 Point.prototype.isSame = function (pt) {
   if ((pt instanceof Point) && (this.x == pt.x && this.y == pt.y))
     return true;
-  else
+  }
+  else{
     return false; 
+  }
 }
 
 Point.prototype.toString = function (){
