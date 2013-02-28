@@ -60,7 +60,7 @@ function init () {
   //All mouse events occur on user layer as it is on top
   $("#user").mousemove(function (e){ 
     mouseOverPoint = mouseMove(3, e.pageX - offsetLeft, e.pageY - offsetTop);
-    drawer.clearLayer(3);
+    game.clearLayer(3);
     if (mouseOverPoint){
       game.draw(mouseOverPoint, "#0000FF");
     }
