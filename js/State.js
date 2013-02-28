@@ -60,6 +60,7 @@ State.prototype.addCircle = function (circle) {
     }
   }
 }
+
 State.prototype.addPotentialPoint = function (point) {
   if (point instanceof Point){
     if (!point.isInArray(this.potentialPoints)){
@@ -68,6 +69,28 @@ State.prototype.addPotentialPoint = function (point) {
   }
   else {
     console.log("not a point.");
+  }
+}
+
+State.prototype.add = function (object){
+  if (object instanceof Point){
+    this.addPoint(object);
+  }
+  else if (object instanceof Line){
+    this.addLine(object);
+  }
+  else if (object instanceof Circle){
+    this.addCircle(object);
+  }
+  else if (object instanceof Array){
+    for (var i; i < object.length; i++){
+      this.add(object[i]);
+    }
+  }
+  else if (object instanceof State){
+    this.add(object.points);
+    this.add(object.lines);
+    this.add(object.circles);
   }
 }
 
