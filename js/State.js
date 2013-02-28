@@ -92,6 +92,11 @@ State.prototype.add = function (object){
     this.add(object.lines);
     this.add(object.circles);
   }
+  else if (object.points || object.lines || object.circles){
+    this.add(object.points);
+    this.add(object.lines);
+    this.add(object.circles);
+  }
 }
 
 
