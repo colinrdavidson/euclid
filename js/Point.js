@@ -13,7 +13,7 @@ Point.prototype.copy = function (layer) {
 }
 
 Point.prototype.isSame = function (pt) {
-  if ((pt instanceof Point) && (this.x == pt.x && this.y == pt.y))
+  if ((pt instanceof Point) && (this.x == pt.x && this.y == pt.y)){
     return true;
   }
   else{
@@ -28,9 +28,9 @@ Point.prototype.toString = function (){
 Point.prototype.isInArray = function (array){
   //assume this array is full of points
   for(var i = 0; i < array.length; i++){
-    if (this.isSame(array[i]))
+    if (this.isSame(array[i])){
       return true;
+    }
   }
-
   return false;
 }

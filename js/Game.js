@@ -55,7 +55,7 @@ Game.prototype.levelParse = function (level) {
 
       if (point1 && point2){
         var newLine = new Line(0, point1, point2);
-        state.addline(newLine);
+        state.addLine(newLine);
       }
       else{
         console.log("those points don't exist");

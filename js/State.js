@@ -21,7 +21,7 @@ State.prototype.addLine = function (line) {
   if (line instanceof Line){
     if (!line.isInArray(this.lines)){
       for (var i = 0; i < this.lines.length; i++){
-        var potentialPoints = newLine.intersectsWith(this.lines[i]);
+        var potentialPoints = line.intersectsWith(this.lines[i]);
 
         if (potentialPoints){
           for (var j = 0; j < potentialPoints.length; j++){
@@ -41,9 +41,9 @@ State.prototype.addLine = function (line) {
 
 State.prototype.addCircle = function (circle) {
   if(circle instanceof Circle){
-    if (!circle.isinArray(this.circles){
+    if (!circle.isInArray(this.circles)){
       for (var i = 0; i < this.lines.length; i++){
-        var potentialPoints = newCircle.intersectsWith(this.lines[i]);
+        var potentialPoints = circle.intersectsWith(this.lines[i]);
 
         if (potentialPoints){
           for (var j = 0; j < potentialPoints.length; j++){

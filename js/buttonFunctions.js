@@ -9,7 +9,6 @@ function clickLine(layer, currentPoint1, currentPoint2){
   {
     var line = new Line(layer, currentPoint1, currentPoint2);
     game.add(line);
-    }
   }
 }
 
@@ -19,6 +18,5 @@ function clickCircle(layer, currentPoint1, currentPoint2){
   {
     var circle = new Circle(layer, currentPoint1, currentPoint2);
     game.add(circle)
-    }
   }
 }
