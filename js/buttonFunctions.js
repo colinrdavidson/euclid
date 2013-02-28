@@ -5,8 +5,7 @@ function clickStart(){
 
 function clickLine(layer, currentPoint1, currentPoint2){
   console.log("Clicked Line");
-  if (currentPoint1 && currentPoint2)
-  {
+  if (currentPoint1 && currentPoint2){
     var line = new Line(layer, currentPoint1, currentPoint2);
     game.add(line);
   }
