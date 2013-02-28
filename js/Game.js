@@ -88,7 +88,13 @@ Game.prototype.circles = function (){
   return this.state.circles;
 }
 
+Game.prototype.potentialPoints = function (){
+  return this.state.potentailPoints;
+}
 
+Game.prototype.allPoints = function (){
+  return this.state.points.concat(this.state.potentialPoints);
+}
 
 Game.prototype.draw = function (object, colour){
   if (!object){
