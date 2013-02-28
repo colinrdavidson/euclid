@@ -19,18 +19,6 @@ Game.prototype.loadLevel = function (levelName) {
   }
 }
 
-Game.prototype.addPoint = function (point) {
-  this.state.addPoint(point);
-}
-
-Game.prototype.addLine = function (line) {
-  this.state.addLine(line);
-}
-
-Game.prototype.addCircle = function (circle) {
-  this.state.addCircle(circle);
-}
-
 Game.prototype.levelParse = function (level) {
   // turns this object into a state
   var state = new State();
@@ -40,7 +28,8 @@ Game.prototype.levelParse = function (level) {
     var pointCount = objectCount(points);  
 
     for (var i = 0; i < pointCount; i++){
-      state.addPoint(new Point(0, points[i].x, points[i].y));
+      newPoint = new Point(0, points[i].x, points[i].y
+      state.addPoint(newPoint);
     }
   }
 
@@ -87,6 +76,57 @@ Game.prototype.levelParse = function (level) {
 
 }
 
+Game.prototype.addPoint = function (point){
+  this.state.addPoint(point);
+  this.draw(point);
+}
+
+Game.prototype.addLine = function (line){
+  this.state.addLine(line);
+  this.draw(line);
+}
+
+Game.prototype.addCircle = function (circle){
+  this.state.addCircle(circle);
+  this.draw(circle);
+}
+
+Game.prototype.add = function (object){
+  if (object instanceof Point){
+    this.addPoint(object);
+  }
+  else if (object instanceof Line){
+    this.addLine(object);
+  }
+  else if (object instanceof Circle){
+    this.addCircle(object);
+  }
+  else if (object instanceof Array){
+    for (var i; i < object.length; i++){
+      this.add(object[i]);
+    }
+  }
+  else if (object instanceof State){
+    this.add(object.points);
+    this.add(object.lines);
+    this.add(object.circles);
+  }
+}
+
+Game.prototype.points = function (){
+  return this.state.points;
+}
+
+Game.prototype.lines = function (){
+  return this.state.lines;
+}
+
+Game.prototype.circles = function (){
+  return this.state.circles;
+}
+
+
+
 Game.prototype.draw = function (object){
   if (!object){
     this.drawer.draw(game.state);
@@ -94,4 +134,8 @@ Game.prototype.draw = function (object){
   else{
     this.drawer.draw(object);
   }
+}
+
+Game.prototype.clearLayer = function (layer){
+  this.drawer.clearLayer(layer);
 }

@@ -25,8 +25,8 @@ function clickCanvas (layer, mouseOverPoint, pt1, pt2){
 }
 
 function mouseMove (layer, x, y){
-  for (var i = 0; i < game.points.length; i++){
-    var currPoint = game.points[i];
+  for (var i = 0; i < game.points().length; i++){
+    var currPoint = game.points()[i];
 
     if (pointPointDistance(x, y, currPoint.x, currPoint.y) <= 5){
       return currPoint.copy(layer);
