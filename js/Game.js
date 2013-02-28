@@ -90,12 +90,12 @@ Game.prototype.circles = function (){
 
 
 
-Game.prototype.draw = function (object){
+Game.prototype.draw = function (object, colour){
   if (!object){
-    this.drawer.draw(game.state);
+    this.drawer.draw(game.state, colour);
   }
   else{
-    this.drawer.draw(object);
+    this.drawer.draw(object, colour);
   }
 }
 
