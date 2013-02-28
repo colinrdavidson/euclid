@@ -72,6 +72,42 @@ State.prototype.addPotentialPoint = function (point) {
   }
 }
 
+State.prototype.addLevelState = function (levelState) {
+  var points = levelState.points;
+
+  if (points){
+
+    for (var p in points){
+      var point = new Point(0, points[p].x, points[p].y);
+      //So we can refer to this point later
+      points[p] = point;
+      this.addPoint(point); 
+    }
+  }
+
+  var lines = levelState.lines;
+
+  if (lines){
+    for (var l in lines){
+      var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
+      
+      this.addLine(line);
+    }
+  }
+
+  var circles = levelState.circles;
+
+  if (circles){
+    for (var c in circles){
+      var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
+
+      this.addCircle(circle);
+
+    } 
+  }
+
+}
+
 State.prototype.add = function (object){
   if (object instanceof Point){
     this.addPoint(object);
@@ -93,9 +129,7 @@ State.prototype.add = function (object){
     this.add(object.circles);
   }
   else if (object.points || object.lines || object.circles){
-    this.add(object.points);
-    this.add(object.lines);
-    this.add(object.circles);
+    this.addLevelState(object);
   }
 }
 

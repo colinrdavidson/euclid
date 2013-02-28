@@ -35,8 +35,8 @@ function init () {
   game = new Game(drawer);
   game.loadLevel("Level0");
 
-  drawer.draw(game.state);
-  drawer.draw(game.state.potentialPoints);
+  game.draw();
+
 
   //Special Points
   var mouseOverPoint = null; 
