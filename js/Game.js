@@ -44,8 +44,7 @@ Game.prototype.addPoint = function (point){
   this.draw(point);
 }
 
-Game.prototype.addLine = function (line){
-  this.state.addLine(line);
+Game.prototype.addLine = function (line){ this.state.addLine(line);
   this.draw(line);
 }
 
@@ -89,7 +88,7 @@ Game.prototype.circles = function (){
 }
 
 Game.prototype.potentialPoints = function (){
-  return this.state.potentailPoints;
+  return this.state.potentialPoints;
 }
 
 Game.prototype.allPoints = function (){
