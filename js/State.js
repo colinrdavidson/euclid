@@ -137,4 +137,26 @@ State.prototype.add = function (object){
   }
 }
 
+State.prototype.isContainedIn = function (state) {
+  if (state instanceof State){
+    for (var i = 0; i < this.points.length; i++){
+      if (!this.points[i].isInArray(state.points)){
+        return false;
+      }
+    }
+    for (var i = 0; i < this.lines.length; i++){
+      if (!this.lines[i].isInArray(state.lines)){
+        return false;
+      }
+    }
+    for (var i = 0; i < this.circles.length; i++){
+      if (!this.circles[i].isInArray(state.circles)){
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 
