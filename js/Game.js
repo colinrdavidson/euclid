@@ -18,18 +18,6 @@ Game.prototype.loadLevel = function (levelName) {
   }
 }
 
-Game.prototype.addPoint = function (point) {
-  this.state.addPoint(point);
-}
-
-Game.prototype.addLine = function (line) {
-  this.state.addLine(line);
-}
-
-Game.prototype.addCircle = function (circle) {
-  this.state.addCircle(circle);
-}
-
 Game.prototype.levelInitialize = function (level) {
   // turns this object into a state
   this.state = new State();
@@ -44,7 +32,8 @@ Game.prototype.addPoint = function (point){
   this.draw(point);
 }
 
-Game.prototype.addLine = function (line){ this.state.addLine(line);
+Game.prototype.addLine = function (line){ 
+  this.state.addLine(line);
   this.draw(line);
 }
 
