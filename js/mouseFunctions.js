@@ -26,6 +26,9 @@ function clickCanvas (layer, mouseOverPoint, pt1, pt2){
   }
   else if (mouseOverPoint.isInArray(game.potentialPoints())){
     game.add(mouseOverPoint.copy(1))
+    if (game.complete()){
+      console.log("You win, you always do.");
+    }
     return [pt1, pt2];
   }
 }
