@@ -27,22 +27,42 @@ Game.prototype.levelInitialize = function (level) {
   this.goalState.add(level.goalState);
 }
 
-Game.prototype.addPoint = function (point){
+Game.prototype.points = function () {
+  return this.state.points;
+}
+
+Game.prototype.lines = function () {
+  return this.state.lines;
+}
+
+Game.prototype.circles = function () {
+  return this.state.circles;
+}
+
+Game.prototype.potentialPoints = function () {
+  return this.state.potentialPoints;
+}
+
+Game.prototype.allPoints = function () {
+  return this.state.points.concat(this.state.potentialPoints);
+}
+
+Game.prototype.addPoint = function (point) {
   this.state.addPoint(point);
   this.draw(point);
 }
 
-Game.prototype.addLine = function (line){ 
+Game.prototype.addLine = function (line) { 
   this.state.addLine(line);
   this.draw(line);
 }
 
-Game.prototype.addCircle = function (circle){
+Game.prototype.addCircle = function (circle) {
   this.state.addCircle(circle);
   this.draw(circle);
 }
 
-Game.prototype.add = function (object){
+Game.prototype.add = function (object) {
   if (object instanceof Point){
     this.addPoint(object);
   }
@@ -64,27 +84,7 @@ Game.prototype.add = function (object){
   }
 }
 
-Game.prototype.points = function (){
-  return this.state.points;
-}
-
-Game.prototype.lines = function (){
-  return this.state.lines;
-}
-
-Game.prototype.circles = function (){
-  return this.state.circles;
-}
-
-Game.prototype.potentialPoints = function (){
-  return this.state.potentialPoints;
-}
-
-Game.prototype.allPoints = function (){
-  return this.state.points.concat(this.state.potentialPoints);
-}
-
-Game.prototype.draw = function (object, colour){
+Game.prototype.draw = function (object, colour) {
   if (!object){
     this.drawer.draw(game.state, colour);
   }
@@ -93,6 +93,15 @@ Game.prototype.draw = function (object, colour){
   }
 }
 
-Game.prototype.clearLayer = function (layer){
+Game.prototype.clearLayer = function (layer) {
   this.drawer.clearLayer(layer);
+}
+
+Game.prototype.complete = function () {
+  if (this.goalState.isContainedIn(this.state)){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
