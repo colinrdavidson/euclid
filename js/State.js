@@ -5,6 +5,10 @@ var State = function () {
   this.circles = [];
 }
 
+State.prototype.allShapes = function () {
+  return this.lines.concat(this.circles);
+}
+
 State.prototype.addPoint = function (point) {
   if (point instanceof Point){
     if (!point.isInArray(this.points)){
@@ -20,8 +24,8 @@ State.prototype.addPoint = function (point) {
 State.prototype.addLine = function (line) {
   if (line instanceof Line){
     if (!line.isInArray(this.lines)){
-      for (var i = 0; i < this.lines.length; i++){
-        var potentialPoints = line.intersectsWith(this.lines[i]);
+      for (var i = 0; i < this.allShapes().length; i++){
+        var potentialPoints = line.intersectsWith(this.allShapes()[i]);
 
         if (potentialPoints){
           for (var j = 0; j < potentialPoints.length; j++){
@@ -42,8 +46,8 @@ State.prototype.addLine = function (line) {
 State.prototype.addCircle = function (circle) {
   if(circle instanceof Circle){
     if (!circle.isInArray(this.circles)){
-      for (var i = 0; i < this.lines.length; i++){
-        var potentialPoints = circle.intersectsWith(this.lines[i]);
+      for (var i = 0; i < this.allShapes().length; i++){
+        var potentialPoints = circle.intersectsWith(this.allShapes()[i]);
 
         if (potentialPoints){
           for (var j = 0; j < potentialPoints.length; j++){
