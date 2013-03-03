@@ -30,16 +30,17 @@ Drawer.prototype.drawPoint = function (object, colour){
 
 Drawer.prototype.drawLine = function (object, colour){
   var layer = this.layers[object.layer];
-  var pt1X = object.pt1.x;
-  var pt1Y = object.pt1.y;
-  var pt2X = object.pt2.x;
-  var pt2Y = object.pt2.y;
+  var x1 = object.pt1.x;
+  var y1 = object.pt1.y;
+  var x2 = object.pt2.x;
+  var y2 = object.pt2.y;
 
   //draw the line
-  layer.fillstyle = colour;
+  layer.lineWidth = 3;
+  layer.strokeStyle = colour;
   layer.beginPath();
-  layer.moveTo(pt1X, pt1Y);
-  layer.lineTo(pt2X, pt2Y);
+  layer.moveTo(x1, y1);
+  layer.lineTo(x2, y2);
   layer.closePath();
   layer.stroke();
 }
@@ -53,7 +54,8 @@ Drawer.prototype.drawCircle = function (object, colour){
   var radius = Math.sqrt(Math.pow(focX - locX, 2) + Math.pow(focY - locY, 2));
 
   //draw the circle
-  layer.fillStyle = colour;
+  layer.lineWidth = 3;
+  layer.strokeStyle = colour;
   layer.beginPath();
   layer.arc(focX, focY, radius, 0, Math.PI*2, true);
   layer.closePath();
@@ -68,21 +70,17 @@ Drawer.prototype.draw = function (object, colour){
   if (object instanceof Point){
     this.drawPoint(object, colour);
   }
-
   else if (object instanceof Line){
     this.drawLine(object, colour);
   }
-
   else if (object instanceof Circle){
     this.drawCircle(object, colour);
   }
-
   else if (object instanceof State){
     this.draw(object.points, colour);
     this.draw(object.lines, colour);
     this.draw(object.circles, colour);
   }
-
   else if (object instanceof Array){
     for (var i = 0; i < object.length; i++){
       this.draw(object[i], colour);

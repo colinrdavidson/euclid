@@ -20,6 +20,10 @@ Line.prototype.isSame = function(Ln) {
   }
 }
 
+Line.prototype.copy = function (layer) {
+  return new Line(layer, this.pt1, this.pt2);
+}
+
 Line.prototype.intersectsWith = function(shape){
   var pointsOfIntersection = [];
   var x1 = this.pt1.x;
@@ -188,7 +192,6 @@ Line.prototype.containsPoint = function(point){
       return true;
     }
   }
-  
   return false;
 }
 
@@ -201,6 +204,5 @@ Line.prototype.isInArray = function (array){
     if (this.isSame(array[i]))
       return true;
   }
-
   return false;
 }

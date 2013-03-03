@@ -6,12 +6,11 @@ var Circle = function (layer, foc, loc){
   this.layer = layer;
   this.foc = foc;
   this.loc = loc;
+  this.radius = foc.distanceToPoint(loc);
 }
 
-Circle.prototype.isSame = function(Cir) {
-  if (this.foc.isSame(Cir.foc) && this.loc.isSame(Cir.loc)) return true;
-  else return false;
-  if ((Cir instanceof Circle) && this.foc.isSame(Cir.Foc()) && this.loc.isSame(Cir.Loc())){
+Circle.prototype.isSame = function (Cir) {
+  if ((Cir instanceof Circle) && this.foc.isSame(Cir.foc) && this.radius == Cir.radius){
     return true;
   }
   else{
@@ -19,7 +18,11 @@ Circle.prototype.isSame = function(Cir) {
   }
 }
 
-Circle.prototype.intersectsWith = function(shape){
+Circle.prototype.copy = function (layer) {
+  return new Circle(layer, this.foc, this.loc);
+}
+
+Circle.prototype.intersectsWith = function (shape) {
   var pointsOfIntersection = [];
 
   if (shape instanceof Circle){

@@ -26,19 +26,18 @@ function clickCanvas (layer, mouseOverPoint, pt1, pt2){
   }
   else if (mouseOverPoint.isInArray(game.potentialPoints())){
     game.add(mouseOverPoint.copy(1))
-    if (game.complete()){
-      console.log("You win, you always do.");
-    }
     return [pt1, pt2];
   }
 }
 
-function mouseMove (layer, x, y){
-  for (var i = 0; i < game.allPoints().length; i++){
-    var currPoint = game.allPoints()[i];
+function getMouseOverObject (layer, x, y){
+  var dummyPoint = new Point(layer, x, y);
 
-    if (pointPointDistance(x, y, currPoint.x, currPoint.y) <= 5){
-      return currPoint.copy(layer);
+  for (var i = 0; i < game.allObjects().length; i++){
+    var currObject = game.allObjects()[i];
+
+    if (dummyPoint.distanceTo(currObject) <= 5){
+      return currObject.copy(layer);
     }
   }
   return null;

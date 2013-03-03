@@ -5,8 +5,16 @@ var State = function () {
   this.circles = [];
 }
 
+State.prototype.allPoints = function () {
+  return this.points.concat(this.potentialPoints);
+}
+
 State.prototype.allShapes = function () {
   return this.lines.concat(this.circles);
+}
+
+State.prototype.allObjects = function () {
+  return this.allPoints().concat(this.allShapes());
 }
 
 State.prototype.addPoint = function (point) {

@@ -44,7 +44,15 @@ Game.prototype.potentialPoints = function () {
 }
 
 Game.prototype.allPoints = function () {
-  return this.state.points.concat(this.state.potentialPoints);
+  return this.state.allPoints();
+}
+
+Game.prototype.allShapes = function () {
+  return this.state.allShapes();
+}
+
+Game.prototype.allObjects = function () {
+  return this.state.allObjects();
 }
 
 Game.prototype.addPoint = function (point) {
@@ -82,6 +90,10 @@ Game.prototype.add = function (object) {
     this.add(object.lines);
     this.add(object.circles);
   }
+
+  if (game.complete()){
+    alert("You win, you always do!");
+  }
 }
 
 Game.prototype.draw = function (object, colour) {
@@ -90,6 +102,15 @@ Game.prototype.draw = function (object, colour) {
   }
   else{
     this.drawer.draw(object, colour);
+  }
+}
+
+Game.prototype.drawGoals = function (colour) {
+  if (!colour){
+    colour = "#000000";
+  }
+  else{
+    this.drawer.draw(game.goalState, colour);
   }
 }
 

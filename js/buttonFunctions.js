@@ -1,5 +1,6 @@
 function clickStart(){
   console.log("Clicked Start.");
+  game.drawGoals("#00FFFF");
   game.draw();
 } 
 

@@ -35,11 +35,8 @@ function init () {
   game = new Game(drawer);
   game.loadLevel("Level0");
 
-  game.draw();
-
-
   //Special Points
-  var mouseOverPoint = null; 
+  var mouseOverObject = null; 
   var currentPoint1 = null;
   var currentPoint2 = null;
 
@@ -59,16 +56,22 @@ function init () {
   //Mouse Events
   //All mouse events occur on user layer as it is on top
   $("#user").mousemove(function (e){ 
-    mouseOverPoint = mouseMove(3, e.pageX - offsetLeft, e.pageY - offsetTop);
+    mouseOverObject = getMouseOverObject(3, e.pageX - offsetLeft, e.pageY - offsetTop);
     game.clearLayer(3);
-    if (mouseOverPoint){
-      game.draw(mouseOverPoint, "#0000FF");
+    if (mouseOverObject instanceof Point){
+      game.draw(mouseOverObject, "#0000FF");
+    }
+    else if (mouseOverObject instanceof Line){
+      game.draw([mouseOverObject, mouseOverObject.pt1.copy(3), mouseOverObject.pt2.copy(3)], "0000FF");
+    }
+    else if (mouseOverObject instanceof Circle){
+      game.draw([mouseOverObject, mouseOverObject.foc.copy(3), mouseOverObject.loc.copy(3)], "0000FF");
     }
   });
 
   $("#user").mousedown(function (e){
-    if (mouseOverPoint){
-      var clickedPoints = clickCanvas(2, mouseOverPoint, currentPoint1, currentPoint2);
+    if (mouseOverObject instanceof Point){
+      var clickedPoints = clickCanvas(2, mouseOverObject, currentPoint1, currentPoint2);
       currentPoint1 = clickedPoints[0];
       currentPoint2 = clickedPoints[1];
 
