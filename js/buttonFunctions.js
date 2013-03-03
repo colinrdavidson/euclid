@@ -1,5 +1,7 @@
 function clickStart(){
   console.log("Clicked Start.");
+  game.loadLevel("Level0");
+  game.clearLayer([0,1,2,3,4]);
   game.drawGoals("#00FFFF");
   game.draw();
 } 

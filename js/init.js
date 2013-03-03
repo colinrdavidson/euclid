@@ -33,7 +33,6 @@ function init () {
   drawer.initialize(contexts, height, width);
 
   game = new Game(drawer);
-  game.loadLevel("Level0");
 
   //Special Points
   var mouseOverObject = null; 
