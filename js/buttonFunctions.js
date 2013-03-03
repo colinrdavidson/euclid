@@ -13,7 +13,7 @@ function clickLine(layer, currentPoint1, currentPoint2){
 }
 
 function clickCircle(layer, currentPoint1, currentPoint2){
-  console.log("Clicked Circle
+  console.log("Clicked Circle");
   if (currentPoint1 && currentPoint2)
   {
     var circle = new Circle(layer, currentPoint1, currentPoint2);
