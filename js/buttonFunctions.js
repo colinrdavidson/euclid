@@ -1,9 +1,10 @@
-function clickStart(){
+function clickStart(mouseOverObject, currentPoint1, currentPoint2){
   console.log("Clicked Start.");
   game.loadLevel("Level0");
   game.clearLayer([0,1,2,3,4]);
   game.drawGoals("#00FFFF");
   game.draw();
+  return [null, null, null];
 } 
 
 function clickLine(layer, currentPoint1, currentPoint2){

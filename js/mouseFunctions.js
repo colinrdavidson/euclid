@@ -1,32 +1,32 @@
-function clickCanvas (layer, mouseOverPoint, pt1, pt2){
-  if (mouseOverPoint.isInArray(game.points())){
+function clickCanvas (layer, mouseOverObject, pt1, pt2){
+  if (mouseOverObject.isInArray(game.points())){
     if (!pt2) {
-      console.log("First point added:", mouseOverPoint.toString());
-      return [null, mouseOverPoint.copy(layer)];
+      console.log("First point added:", mouseOverObject.toString());
+      return [null, mouseOverObject.copy(layer)];
     }
     else if (!pt1) {
-      if (pt2.isSame(mouseOverPoint)){
+      if (pt2.isSame(mouseOverObject)){
         console.log("Trying to add same point, no changes");
         return [null, pt2];
       }
       else {
-        console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-        return[pt2, mouseOverPoint.copy(layer)];
+        console.log("Second point added: pt1: ", pt2.toString(), "pt2: ", mouseOverObject.toString());
+        return[pt2, mouseOverObject.copy(layer)];
       }
     }
-    else if (pt2.isSame(mouseOverPoint))
+    else if (pt2.isSame(mouseOverObject))
     {
       console.log("Trying to add same point, no changes");
       return [pt1, pt2];
     }
     else{
-      console.log("Jimmy the points: pt1: ", pt2.toString(), "pt2: ", mouseOverPoint.toString());
-      return [pt2, mouseOverPoint.copy(layer)];
+      console.log("Jimmy the points: pt1: ", pt2.toString(), "pt2: ", mouseOverObject.toString());
+      return [pt2, mouseOverObject.copy(layer)];
     }
   }
-  else if (mouseOverPoint.isInArray(game.potentialPoints())){
-    game.add(mouseOverPoint.copy(1))
-    return [pt1, pt2];
+  else if (mouseOverObject.isInArray(game.potentialPoints())){
+    game.add(mouseOverObject.copy(1))
+    return [pt2, mouseOverObject.copy(layer)];
   }
 }
 

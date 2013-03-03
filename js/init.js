@@ -41,7 +41,10 @@ function init () {
 
   //Button Events
   $("#startButton").click(function (){
-    clickStart();
+    var array = clickStart(mouseOverObject, currentPoint1, currentPoint2);
+    mouseOverObject = array[0];
+    currentPoint1 = array[1];
+    currentPoint2 = array[2];
   });
 
   $("#lineButton").click(function (){ 
