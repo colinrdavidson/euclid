@@ -1,7 +1,25 @@
 function clickStart(mouseOverObject, currentPoint1, currentPoint2){
   console.log("Clicked Start.");
-  game.loadLevel("Level0");
-  game.clearLayer();
+  if (!(game.levelName)){
+    game.loadLevel("intro0");
+  }
+  else if (game.complete()){ 
+    if (game.levelName == "intro0"){
+      game.loadLevel("intro1");
+    }
+    else if (game.levelName == "intro1"){
+      game.loadLevel("level0");
+    }
+    else if (game.levelName == "level0"){
+      game.loadLevel("level1");
+    }
+    else if (game.levelName == "level1"){
+      game.loadLevel("level2");
+    }
+  }
+  else{
+    game.loadLevel(game.levelName);
+  }
   game.drawGoals("#00FFFF");
   game.draw();
   return [null, null, null];

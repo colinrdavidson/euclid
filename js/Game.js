@@ -2,9 +2,12 @@ var Game = function (drawer) {
   this.drawer = drawer;
   this.state = new State();
   this.goalState = new State();
+  this.levelName;
 }
 
 Game.prototype.loadLevel = function (levelName) {
+  this.levelName = levelName;
+  this.clearLayer();
   //find levelName in levelArray
   var level = Levels[levelName]; 
 
