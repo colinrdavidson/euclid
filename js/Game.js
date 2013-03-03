@@ -115,7 +115,10 @@ Game.prototype.drawGoals = function (colour) {
 }
 
 Game.prototype.clearLayer = function (layer) {
-  if (layer instanceof Array){
+  if (!layer){
+    this.drawer.clearLayer();
+  }
+  else if (layer instanceof Array){
     for (var i = 0; i < layer.length; i++){
       this.clearLayer(layer[i]);
     }

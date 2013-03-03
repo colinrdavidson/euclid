@@ -11,8 +11,16 @@ Drawer.prototype.initialize = function (canvasList, height, width){
 }
 
 Drawer.prototype.clearLayer = function (layerToClear){
-  var context = this.layers[layerToClear];
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+  if (layerToClear){
+    var context = this.layers[layerToClear];
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+  }
+  else{
+    for (var l in this.layers){
+      var context = this.layers[l];
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+    }
+  }
 }
   
 Drawer.prototype.drawPoint = function (object, colour){
