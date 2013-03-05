@@ -41,7 +41,7 @@ function init () {
 
   //Button Events
   $("#startButton").click(function (){
-    var array = clickStart(mouseOverObject, currentPoint1, currentPoint2);
+    var array = clickStart();
     mouseOverObject = array[0];
     currentPoint1 = array[1];
     currentPoint2 = array[2];
@@ -53,6 +53,10 @@ function init () {
 
   $("#circleButton").click(function (){ 
     clickCircle(1, currentPoint1, currentPoint2);
+  });
+
+  $("#sandboxButton").click(function (){
+    clickSandbox();
   });
 
   //Mouse Events

@@ -36,7 +36,12 @@ function getMouseOverObject (layer, x, y){
   for (var i = 0; i < game.allObjects().length; i++){
     var currObject = game.allObjects()[i];
 
-    if (dummyPoint.distanceTo(currObject) <= 5){
+    if (currObject instanceof Point){
+      if (dummyPoint.distanceTo(currObject) <= 8){
+        return currObject.copy(layer);
+      }
+    }
+    else if (dummyPoint.distanceTo(currObject) <= 5){
       return currObject.copy(layer);
     }
   }
