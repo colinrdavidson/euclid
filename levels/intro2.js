@@ -1,5 +1,5 @@
-var level0 = {
-  name: "level0",
+var intro2 = {
+  name: "intro2",
   state:
   {
     points:
@@ -36,4 +36,4 @@ var level0 = {
     }
   }
 }
-Levels[level0.name] = level0;
+Levels[intro2.name] = intro2;
