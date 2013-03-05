@@ -8,12 +8,12 @@ function clickStart(mouseOverObject, currentPoint1, currentPoint2){
       game.loadLevel("intro1");
     }
     else if (game.levelName == "intro1"){
-      game.loadLevel("level0");
+      game.loadLevel("intro2");
     }
-    else if (game.levelName == "level0"){
-      game.loadLevel("level1");
+    else if (game.levelName == "intro2"){
+      game.loadLevel("prop1");
     }
-    else if (game.levelName == "level1"){
+    else if (game.levelName == "prop1"){
       game.loadLevel("level2");
     }
   }
