@@ -36,23 +36,23 @@ function init () {
 
   //Special Points
   var mouseOverObject = null; 
-  var currentPoint1 = null;
-  var currentPoint2 = null;
+  var currentObject1 = null;
+  var currentObject2 = null;
 
   //Button Events
   $("#startButton").click(function (){
     var array = clickStart();
     mouseOverObject = array[0];
-    currentPoint1 = array[1];
-    currentPoint2 = array[2];
+    currentObject1 = array[1];
+    currentObject2 = array[2];
   });
 
   $("#lineButton").click(function (){ 
-    clickLine(1, currentPoint1, currentPoint2); 
+    clickLine(1, currentObject1, currentObject2); 
   });
 
   $("#circleButton").click(function (){ 
-    clickCircle(1, currentPoint1, currentPoint2);
+    clickCircle(1, currentObject1, currentObject2);
   });
 
   $("#sandboxButton").click(function (){
@@ -76,14 +76,33 @@ function init () {
   });
 
   $("#user").mousedown(function (e){
-    if (mouseOverObject instanceof Point){
-      var clickedPoints = clickCanvas(2, mouseOverObject, currentPoint1, currentPoint2);
-      currentPoint1 = clickedPoints[0];
-      currentPoint2 = clickedPoints[1];
+    var clickedObjects = clickCanvas(2, mouseOverObject, currentObject1, currentObject2);
+    currentObject1 = clickedObjects[0];
+    currentObject2 = clickedObjects[1];
 
+    if (mouseOverObject instanceof Point){
       game.clearLayer(2);
-      if (currentPoint1) game.draw(currentPoint1, "#00FF00");
-      if (currentPoint2) game.draw(currentPoint2, "#FF0000");
+      if (currentObject1){
+        game.draw(currentObject1, "#00FF00");
+      }
+      if (currentObject2){
+        game.draw(currentObject2, "#FF0000");
+      }
+    }
+
+    else if (mouseOverObject instanceof Line){
+      console.log("Clicked on a line");
+      game.clearLayer(2);
+      if (currentObject1){
+        game.draw(currentObject1, "#00FF00")
+      }
+    }
+    else if (mouseOverObject instanceof Circle){
+      console.log("Clicked on a line");
+      game.clearLayer(2);
+      if (currentObject1){
+        game.draw(currentObject1, "#00FF00")
+      }
     }
   });
 }
