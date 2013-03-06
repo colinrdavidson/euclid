@@ -44,7 +44,14 @@ function clickCircle(layer, currentPoint1, currentPoint2) {
 
 function clickSandbox () {
   console.log("Clicked Sandbox");
+  clickStart();
   game.loadLevel("level0");
   game.draw();
   return [null, null, null];
+}
+
+function clickExtend (layer, line) {
+  console.log("Clicked Extend");
+  game.add(line.extend(layer)[0]);
+  game.add(line.extend(layer)[1]);
 }

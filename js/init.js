@@ -59,6 +59,12 @@ function init () {
     clickSandbox();
   });
 
+  $("#extendButton").click(function (){
+    if (currentObject1 instanceof Line){
+      clickExtend(1, currentObject1);
+    }
+  });
+
   //Mouse Events
   //All mouse events occur on user layer as it is on top
   $("#user").mousemove(function (e){ 
@@ -76,9 +82,11 @@ function init () {
   });
 
   $("#user").mousedown(function (e){
-    var clickedObjects = clickCanvas(2, mouseOverObject, currentObject1, currentObject2);
-    currentObject1 = clickedObjects[0];
-    currentObject2 = clickedObjects[1];
+    if (mouseOverObject){
+      var clickedObjects = clickCanvas(2, mouseOverObject, currentObject1, currentObject2);
+      currentObject1 = clickedObjects[0];
+      currentObject2 = clickedObjects[1];
+    }
 
     if (mouseOverObject instanceof Point){
       game.clearLayer(2);

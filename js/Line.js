@@ -195,7 +195,63 @@ Line.prototype.containsPoint = function(point){
   return false;
 }
 
-Line.prototype.toString = function(){
+Line.prototype.extend = function (layer) {
+  //draws the other parts of the line to make it touch the sides of the window
+  var x1 = this.pt1.x;
+  var y1 = this.pt1.y;
+  var x2 = this.pt2.x;
+  var y2 = this.pt2.y;
+
+  var dx = x2 - x1;
+  var dy = y2 - y1;
+
+  var c; //scalar multiple to represent any point on the line
+  var d; //scalar multiple to represent any point on the line
+
+  if (dx == 0){ //only look at y dir
+    c = (0 - y1)/dy;
+    d = (400 - y1)/dy;
+  }
+  else if (dy == 00){ //only look at x dir
+    c = (0 - x1)/dx;
+    d = (400 - x1)/dx;
+  }
+  else{ //find scalars when line hits sides of screen
+    if ( Math.abs((0 - x1)/dx) < Math.abs((0 - y1)/dy) ){ //line hits top/left side when x = 0
+      c = (0 - x1)/dx;
+    }
+    else{ //line hits top/left side when y = 0
+      c = (0 - y1)/dy;
+    }
+    if ( Math.abs((400 - x1)/dx) < Math.abs((400 - y1)/dy) ){ //line hits bottom/right side when x = 400
+      d = (400 - x1)/dx;
+    }
+    else{ //line hits bottom/right side when y = 400
+      d = (400 - y1)/dy;
+    }
+  }
+  
+  new_point1 = new Point(layer, x1 + c*dx, y1 + c*dy);
+  new_point2 = new Point(layer, x1 + d*dx, y1 + d*dy);
+
+  if (this.pt1.distanceTo(new_point1) > this.pt2.distanceTo(new_point1)){ //swap new points
+    var temp = new_point2;
+    new_point2 = new_point1;
+    new_point1 = temp;
+  }
+  
+  var new_line1 = new Line(layer, new_point1, this.pt1);
+  var new_line2 = new Line(layer, this.pt2, new_point2);
+
+
+  console.log(new_line1.toString());
+  console.log(this.toString());
+  console.log(new_line2.toString());
+
+  return [new_line1, new_line2];
+}
+
+Line.prototype.toString = function () {
   return "Line: (" + this.pt1.toString() + ", " + this.pt2.toString() + ")"; 
 }
 
