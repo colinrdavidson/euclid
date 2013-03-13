@@ -195,7 +195,7 @@ Line.prototype.containsPoint = function(point){
   return false;
 }
 
-Line.prototype.extend = function (layer) {
+Line.prototype.extend = function () {
   //draws the other parts of the line to make it touch the sides of the window
   var x1 = this.pt1.x;
   var y1 = this.pt1.y;
@@ -231,24 +231,26 @@ Line.prototype.extend = function (layer) {
     }
   }
   
-  new_point1 = new Point(layer, x1 + c*dx, y1 + c*dy);
-  new_point2 = new Point(layer, x1 + d*dx, y1 + d*dy);
+  new_point1 = new Point(this.layer, x1 + c*dx, y1 + c*dy);
+  new_point2 = new Point(this.layer, x1 + d*dx, y1 + d*dy);
 
-  if (this.pt1.distanceTo(new_point1) > this.pt2.distanceTo(new_point1)){ //swap new points
-    var temp = new_point2;
-    new_point2 = new_point1;
-    new_point1 = temp;
-  }
-  
-  var new_line1 = new Line(layer, new_point1, this.pt1);
-  var new_line2 = new Line(layer, this.pt2, new_point2);
+//  if (this.pt1.distanceTo(new_point1) > this.pt2.distanceTo(new_point1)){ //swap new points
+//    var temp = new_point2;
+//    new_point2 = new_point1;
+//    new_point1 = temp;
+//  }
+//  
+//  var new_line1 = new Line(layer, new_point1, this.pt1);
+//  var new_line2 = new Line(layer, this.pt2, new_point2);
+//
+//
+//  console.log(new_line1.toString());
+//  console.log(this.toString());
+//  console.log(new_line2.toString());
+//
 
-
-  console.log(new_line1.toString());
-  console.log(this.toString());
-  console.log(new_line2.toString());
-
-  return [new_line1, new_line2];
+  this.pt1 = new_point1;
+  this.pt2 = new_point2;
 }
 
 Line.prototype.toString = function () {

@@ -83,8 +83,8 @@ Game.prototype.add = function (object) {
   else if (object instanceof Circle){
     this.addCircle(object);
   }
-  else if (object instanceof Array){
-    for (var i; i < object.length; i++){
+  else if (Object.prototype.toString.call(object) === '[object Array]'){
+    for (var i = 0; i < object.length; i++){
       this.add(object[i]);
     }
   }
@@ -121,7 +121,7 @@ Game.prototype.clearLayer = function (layer) {
   if (!layer){
     this.drawer.clearLayer();
   }
-  else if (layer instanceof Array){
+  else if (Object.prototype.toString.call(layer) === '[object Array]'){
     for (var i = 0; i < layer.length; i++){
       this.clearLayer(layer[i]);
     }

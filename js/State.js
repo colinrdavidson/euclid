@@ -130,8 +130,8 @@ State.prototype.add = function (object){
   else if (object instanceof Circle){
     this.addCircle(object);
   }
-  else if (object instanceof Array){
-    for (var i; i < object.length; i++){
+  else if (Object.prototype.toString.call(object) === '[object Array]'){
+    for (var i = 0; i < object.length; i++){
       this.add(object[i]);
     }
   }

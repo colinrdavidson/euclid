@@ -52,6 +52,12 @@ function clickSandbox () {
 
 function clickExtend (layer, line) {
   console.log("Clicked Extend");
-  game.add(line.extend(layer)[0]);
-  game.add(line.extend(layer)[1]);
+  for (var i = 0; i < game.lines().length; i++){
+    if (line.isSame(game.lines()[i])){
+      game.lines()[i].extend();
+      game.draw();
+      game.clearLayer(line.layer);
+      break;
+    }
+  }
 }
